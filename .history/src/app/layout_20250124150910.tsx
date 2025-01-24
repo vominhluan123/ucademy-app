@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={manrope.className}>
-        <div className="grid grid-cols-[300px,minmax(0,1fr)] h-screen">
+        <div className="grid grid-cols-[300px,minmax(0,1fr)]">
           <Sidebar></Sidebar>
           <main>{children}</main>
         </div>
