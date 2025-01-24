@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { Manrope } from "next/font/google";
 import "./globals.css";
-import { manrope } from "@/components/fonts";
+
+const manrope = Manrope({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Ucademy",
-  description: "Next.js Ucademy",
+  description: "Next.js School Management System",
 };
 
 export default function RootLayout({

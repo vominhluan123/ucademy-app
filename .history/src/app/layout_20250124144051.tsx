@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { manrope } from "@/components/fonts";
 
 export const metadata: Metadata = {
   title: "Ucademy",
