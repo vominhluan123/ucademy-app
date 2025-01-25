@@ -1,7 +1,6 @@
 import { MenuIcons } from "@/constants";
 import Link from "next/link";
 import ActiveLink from "../common/ActiveLink";
-import { TMenueItem } from "@/types";
 
 const Sidebar = () => {
   return (
@@ -22,7 +21,15 @@ const Sidebar = () => {
     </div>
   );
 };
-function MenuItems({ url = "/", title = "Khu vực học tập", icon }: TMenueItem) {
+function MenuItems({
+  url = "/",
+  title = "Khu vực học tập",
+  icon,
+}: {
+  url: string;
+  title: string;
+  icon?: React.ReactNode;
+}) {
   return (
     <li>
       <ActiveLink url={url}>

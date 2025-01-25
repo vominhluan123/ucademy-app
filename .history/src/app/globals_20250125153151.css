@@ -35,7 +35,7 @@ button {
   .svg-icon {
     stroke-dashoffset: 1000;
     stroke-dasharray: 1000;
-    animation: dash 7s linear forwards;
+    animation: dash 3s linear forwards;
   }
   @keyframes dash {
     to {

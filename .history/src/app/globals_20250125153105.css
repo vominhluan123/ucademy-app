@@ -34,12 +34,5 @@ button {
 @layer components {
   .svg-icon {
     stroke-dashoffset: 1000;
-    stroke-dasharray: 1000;
-    animation: dash 7s linear forwards;
-  }
-  @keyframes dash {
-    to {
-      stroke-dashoffset: 0;
-    }
   }
 }

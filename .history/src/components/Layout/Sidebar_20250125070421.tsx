@@ -1,7 +1,6 @@
 import { MenuIcons } from "@/constants";
 import Link from "next/link";
 import ActiveLink from "../common/ActiveLink";
-import { TMenueItem } from "@/types";
 
 const Sidebar = () => {
   return (
@@ -9,7 +8,7 @@ const Sidebar = () => {
       <Link href="/" className="font-bold text-3xl inline-block mb-5">
         <span className="text-primary">U</span>cademy
       </Link>
-      <ul>
+      <ul className="">
         {MenuIcons.map((item, index) => (
           <MenuItems
             key={index}
@@ -22,13 +21,18 @@ const Sidebar = () => {
     </div>
   );
 };
-function MenuItems({ url = "/", title = "Khu vực học tập", icon }: TMenueItem) {
+function MenuItems({
+  url = "/",
+  title = "Khu vực học tập",
+  icon,
+}: {
+  url: string;
+  title: string;
+  icon?: React.ReactNode;
+}) {
   return (
     <li>
-      <ActiveLink url={url}>
-        {icon}
-        {title}
-      </ActiveLink>
+      <ActiveLink url={url}>{title}</ActiveLink>
     </li>
   );
 }
