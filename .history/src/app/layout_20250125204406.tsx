@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { manrope } from "@/utils";
+import Sidebar from "@/components/Layout/Sidebar";
 import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
