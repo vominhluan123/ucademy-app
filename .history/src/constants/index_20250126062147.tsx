@@ -8,7 +8,7 @@ export const MenuIcons: TMenueItem[] = [
     icon: <IconPlay className="size-5" />,
   },
   {
-    url: "/explore",
+    url: "/exolore",
     title: "Khám phá",
     icon: <IconExlore className="size-5" />,
   },
