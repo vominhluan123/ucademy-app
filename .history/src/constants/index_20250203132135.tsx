@@ -1,12 +1,6 @@
-import {
-  IconExlore,
-  IconPlay,
-  IconComment,
-  IconOrder,
-  IconStudy,
-  IconUser,
-} from "@/components/icons";
-
+import { IconExlore, IconPlay } from "@/components/icons";
+import IconStudy from "@/components/icons/IconStudy";
+import IconUser from "@/components/icons/IconUser";
 import { TMenueItem } from "@/types";
 
 export const MenuIcons: TMenueItem[] = [
@@ -18,7 +12,7 @@ export const MenuIcons: TMenueItem[] = [
   {
     url: "/study",
     title: "Khu vực học tập",
-    icon: <IconExlore className="size-5" />,
+    icon: <IconStudy className="size-5" />,
   },
   {
     url: "/manage/course",
@@ -33,11 +27,11 @@ export const MenuIcons: TMenueItem[] = [
   {
     url: "/manage/order",
     title: "Quản lý đơn hàng",
-    icon: <IconOrder className="size-5" />,
+    icon: <IconExlore className="size-5" />,
   },
   {
     url: "/manage/comment",
     title: "Quản lý bình luận",
-    icon: <IconComment className="size-5" />,
+    icon: <IconExlore className="size-5" />,
   },
 ];

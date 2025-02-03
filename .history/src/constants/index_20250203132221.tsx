@@ -1,12 +1,8 @@
-import {
-  IconExlore,
-  IconPlay,
-  IconComment,
-  IconOrder,
-  IconStudy,
-  IconUser,
-} from "@/components/icons";
-
+import { IconExlore, IconPlay } from "@/components/icons";
+import IconComment from "@/components/icons/IconComment";
+import IconOrder from "@/components/icons/IconOrder";
+import IconStudy from "@/components/icons/IconStudy";
+import IconUser from "@/components/icons/IconUser";
 import { TMenueItem } from "@/types";
 
 export const MenuIcons: TMenueItem[] = [
