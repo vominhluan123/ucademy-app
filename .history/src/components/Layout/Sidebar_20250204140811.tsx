@@ -8,7 +8,7 @@ import { Fragment } from "react";
 const Sidebar = () => {
   return (
     <Fragment>
-      <div className="p-5 border-r border-r-gray-200 bg-white flex flex-col">
+      <div className="p-5 border-r border-r-gray-200 bg-white">
         <Link href="/" className="font-bold text-3xl inline-block mb-5">
           <span className="text-primary">U</span>cademy
         </Link>
@@ -22,10 +22,7 @@ const Sidebar = () => {
             ></MenuItems>
           ))}
         </ul>
-        {/* User Button */}
-        <div className="mt-auto">
-          <UserButton />
-        </div>
+        <UserButton />
       </div>
     </Fragment>
   );

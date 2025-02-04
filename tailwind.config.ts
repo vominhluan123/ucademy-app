@@ -2,18 +2,26 @@ import { draftMode } from "next/headers";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+    darkMode: ["class"],
+    content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
-    extend: {
-      colors: {
-        primary: "#1E90FF",
-        dark: "#4A90E2",
-      },
-      fontFamily: {
-        primary: ["var(--font-manrope)"],
-      },
-    },
+  	extend: {
+  		colors: {
+  			primary: '#1E90FF',
+  			dark: '#4A90E2'
+  		},
+  		fontFamily: {
+  			primary: [
+  				'var(--font-manrope)'
+  			]
+  		},
+  		borderRadius: {
+  			lg: 'var(--radius)',
+  			md: 'calc(var(--radius) - 2px)',
+  			sm: 'calc(var(--radius) - 4px)'
+  		}
+  	}
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };
 export default config;

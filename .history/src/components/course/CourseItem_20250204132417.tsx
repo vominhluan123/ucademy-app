@@ -7,7 +7,7 @@ import IconClock from "../icons/IconClock";
 
 const CourseItem = () => {
   return (
-    <div className="course-items bg-gray-100  border border-gray-200  p-4 rounded-2xl transition">
+    <div className="course-items bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-4 rounded-2xl transition">
       {/* Ảnh khóa học */}
       <Link href="#" className="block h-[180px] relative">
         <Image
@@ -24,13 +24,13 @@ const CourseItem = () => {
       </Link>
 
       {/* Thông tin khóa học */}
-      <div className="pt-4">
+      <div className="py-4">
         <h3 className="font-bold text-lg mb-3 text-gray-900 dark:text-gray-100">
           Khoá học Next.js
         </h3>
 
         {/* Lượt xem và đánh giá */}
-        <div className="flex items-center justify-between gap-2 mb-5 text-gray-700 ">
+        <div className="flex items-center justify-between gap-2 mb-5 text-gray-700 dark:text-gray-300">
           <div className="flex items-center gap-1">
             <IconEye className="size-4" />
             <span>1000</span>
@@ -43,17 +43,19 @@ const CourseItem = () => {
 
         {/* Thời lượng và giá */}
         <div className="flex items-center justify-between">
-          <span className="text-sm flex items-center gap-1 rounded-full px-3 py-1 bg-primary/10  text-primary ">
+          <span className="text-sm flex items-center gap-1 rounded-full px-3 py-1 bg-primary/10 dark:bg-dark/20 text-primary dark:text-dark">
             <IconClock className="size-4" />
             3h30
           </span>
-          <span className="font-bold text-primary  text-base">3000$</span>
+          <span className="font-bold text-primary dark:text-dark text-base">
+            3000$
+          </span>
         </div>
 
         {/* Nút xem chi tiết */}
         <Link
           href="#"
-          className="flex items-center justify-center h-12 text-white rounded-lg font-semibold bg-primary  hover:bg-secondary hover:shadow-lg hover:scale-105 w-full mt-10 transition-all duration-300 ease-in-out"
+          className="flex items-center justify-center h-12 text-white rounded-lg font-semibold bg-primary dark:bg-dark hover:bg-secondary hover:shadow-lg hover:scale-105 w-full mt-10 transition-all duration-300 ease-in-out"
         >
           Xem chi tiết
         </Link>

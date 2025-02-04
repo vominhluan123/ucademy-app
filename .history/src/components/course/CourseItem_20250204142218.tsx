@@ -47,13 +47,15 @@ const CourseItem = () => {
             <IconClock className="size-4" />
             3h30
           </span>
-          <span className="font-bold text-primary  text-base">3000$</span>
+          <span className="font-bold text-primary dark:text-dark text-base">
+            3000$
+          </span>
         </div>
 
         {/* Nút xem chi tiết */}
         <Link
           href="#"
-          className="flex items-center justify-center h-12 text-white rounded-lg font-semibold bg-primary  hover:bg-secondary hover:shadow-lg hover:scale-105 w-full mt-10 transition-all duration-300 ease-in-out"
+          className="flex items-center justify-center h-12 text-white rounded-lg font-semibold bg-primary dark:bg-dark hover:bg-secondary hover:shadow-lg hover:scale-105 w-full mt-10 transition-all duration-300 ease-in-out"
         >
           Xem chi tiết
         </Link>

@@ -6,14 +6,11 @@
   body {
     @apply bg-gray-100;
   }
-  :root {
-    --radius: 0.5rem;
-  }
 }
 @layer components {
   .svg-icon {
-    stroke-dashoffset: 100;
-    stroke-dasharray: 100;
+    stroke-dashoffset: 1000;
+    stroke-dasharray: 1000;
     animation: dash 1.5s linear forwards;
   }
   @keyframes dash {
