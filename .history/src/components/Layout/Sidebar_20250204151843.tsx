@@ -4,32 +4,26 @@ import ActiveLink from "../common/ActiveLink";
 import { TMenueItem } from "@/types";
 import { UserButton } from "@clerk/nextjs";
 import { Fragment } from "react";
-import { ModeToggle } from "../mode-toogle";
 
 const Sidebar = () => {
   return (
     <Fragment>
-      <div className="p-5 border-r border-r-gray-200 bg-white dark:bg-dark-card dark:border-opacity-10 flex flex-col">
-        {/* Logo */}
+      <div className="p-5 border-r border-r-gray-200 bg-white flex flex-col">
         <Link href="/" className="font-bold text-3xl inline-block mb-5">
           <span className="text-primary">U</span>cademy
         </Link>
-
-        {/* Menu */}
-        <ul className="flex-grow">
+        <ul>
           {MenuIcons.map((item, index) => (
             <MenuItems
               key={index}
               url={item.url}
               title={item.title}
               icon={item.icon}
-            />
+            ></MenuItems>
           ))}
         </ul>
-
-        {/* User Actions */}
-        <div className="mt-auto flex items-center gap-3 p-3 border-t border-gray-200 dark:border-dark-border">
-          <ModeToggle />
+        {/* User Button */}
+        <div className="mt-auto gap-5">
           <UserButton />
         </div>
       </div>

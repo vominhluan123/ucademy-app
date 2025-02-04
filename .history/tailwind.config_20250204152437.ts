@@ -14,7 +14,7 @@ const config: Config = {
           secondary: "#A1A1AA",
           hover: "#1E1E22",
         },
-        primary: "#3B82F6",
+        primary: "#1E90FF",
       },
       fontFamily: {
         primary: ["var(--font-manrope)"],

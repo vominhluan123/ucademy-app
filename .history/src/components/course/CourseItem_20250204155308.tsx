@@ -55,7 +55,7 @@ const CourseItem = () => {
         {/* Nút xem chi tiết */}
         <Link
           href="#"
-          className="flex items-center justify-center h-12 text-white dark:text-dark-text rounded-lg font-semibold bg-primary dark:bg-dark dark:hover:bg-dark-hover  hover:bg-secondary hover:shadow-lg hover:scale-105 w-full mt-10 transition-all duration-300 ease-in-out"
+          className="flex items-center justify-center h-12 text-white rounded-lg font-semibold bg-primary dark:bg-dark dark:hover:bg-dark-hover  hover:bg-secondary hover:shadow-lg hover:scale-105 w-full mt-10 transition-all duration-300 ease-in-out"
         >
           Xem chi tiết
         </Link>

@@ -18,7 +18,7 @@ const CourseItem = () => {
           height={200}
           sizes="@media (min-width: 640px) 300px, 100vw"
         />
-        <span className="absolute inline-block px-3 py-1 rounded-full top-3 z-10 dark:text-dark-text dark:bg-dark-border text-white font-medium bg-green-500 text-xs right-3">
+        <span className="absolute inline-block px-3 py-1 rounded-full top-3 z-10 dark:text-dark-text text-white font-medium bg-green-500 text-xs right-3">
           New
         </span>
       </Link>
@@ -55,7 +55,7 @@ const CourseItem = () => {
         {/* Nút xem chi tiết */}
         <Link
           href="#"
-          className="flex items-center justify-center h-12 text-white dark:text-dark-text rounded-lg font-semibold bg-primary dark:bg-dark dark:hover:bg-dark-hover  hover:bg-secondary hover:shadow-lg hover:scale-105 w-full mt-10 transition-all duration-300 ease-in-out"
+          className="flex items-center justify-center h-12 text-white rounded-lg font-semibold bg-primary dark:bg-dark-border  hover:bg-secondary hover:shadow-lg hover:scale-105 w-full mt-10 transition-all duration-300 ease-in-out"
         >
           Xem chi tiết
         </Link>

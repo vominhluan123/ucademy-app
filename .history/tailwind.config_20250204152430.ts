@@ -6,15 +6,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        dark: {
-          DEFAULT: "#0F0F0F",
-          card: "#18181B",
-          border: "#27272A",
-          text: "#E4E4E7",
-          secondary: "#A1A1AA",
-          hover: "#1E1E22",
-        },
-        primary: "#3B82F6",
+        dark: {},
+        primary: "#1E90FF",
       },
       fontFamily: {
         primary: ["var(--font-manrope)"],

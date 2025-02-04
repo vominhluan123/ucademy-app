@@ -9,7 +9,7 @@ import { ModeToggle } from "../mode-toogle";
 const Sidebar = () => {
   return (
     <Fragment>
-      <div className="p-5 border-r border-r-gray-200 bg-white dark:bg-dark-card dark:border-opacity-10 flex flex-col">
+      <div className="p-5 border-r border-gray-200 bg-white dark:bg-dark dark:border-dark-border text-dark-text flex flex-col">
         {/* Logo */}
         <Link href="/" className="font-bold text-3xl inline-block mb-5">
           <span className="text-primary">U</span>cademy
