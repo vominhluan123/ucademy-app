@@ -1,0 +1,3 @@
+enum EUserStatus {
+  ACTIVE = "ACTIVE",
+}
