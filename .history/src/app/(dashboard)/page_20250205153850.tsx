@@ -1,14 +1,8 @@
 import CourseItem from "@/components/course/CourseItem";
 import Heading from "@/components/typography/Heading";
-import createUser from "@/lib/actions/user.action";
 import React, { Fragment } from "react";
 
-const page = async () => {
-  const user = await createUser({
-    clerkId: "123",
-    email__address: "minhluan@gmail.com",
-    username: "luan",
-  });
+const page = () => {
   return (
     <Fragment>
       <Heading>Khám Phá</Heading>

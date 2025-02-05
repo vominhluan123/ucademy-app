@@ -8,10 +8,9 @@ type TMenueItem = {
   icon: React.ReactNode;
 };
 type TCreateUserParams = {
-  clerkId: string;
   username: string;
   email__address: string;
   name?: string;
   avatar?: string;
 };
-export { TActiveLinkProps, TMenueItem, TCreateUserParams };
+export { TActiveLinkProps, TMenueItem };
