@@ -1,4 +1,3 @@
-import { EUserRole, EUserStatus } from "@/types/enum";
 import { Document, Schema, model, models } from "mongoose";
 
 export interface IUser extends Document {
