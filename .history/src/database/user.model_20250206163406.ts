@@ -53,5 +53,5 @@ const userSchema = new Schema<IUser>({
     default: EUserStatus.ACTIVE,
   },
 });
-const User = models.users || model<IUser>("users", userSchema);
+const User = models.User || model<IUser>("users", userSchema);
 export default User;
