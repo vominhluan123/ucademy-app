@@ -1,6 +1,5 @@
 import createUser from "@/lib/actions/user.action";
 import { WebhookEvent } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
 import { Webhook } from "svix";
 
 const webhookSecret: string = process.env.WEBHOOK_SECRET || "your-secret";
@@ -32,14 +31,10 @@ export async function POST(req: Request) {
     const { id, username, email_addresses, image_url } = msg.data;
     const user = await createUser({
       username: username!,
-      name: username!,
+      name: username
       clerkId: id,
       email: email_addresses[0].email_address,
       avatar: image_url,
-    });
-    return NextResponse.json({
-      message: "OK",
-      user,
     });
   }
   console.log("🚀 ~ POST ~ eventType:", eventType);

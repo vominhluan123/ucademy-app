@@ -1,6 +1,7 @@
 import createUser from "@/lib/actions/user.action";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
+import { json } from "stream/consumers";
 import { Webhook } from "svix";
 
 const webhookSecret: string = process.env.WEBHOOK_SECRET || "your-secret";
