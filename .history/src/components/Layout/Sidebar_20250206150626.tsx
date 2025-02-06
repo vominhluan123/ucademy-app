@@ -9,7 +9,7 @@ import { ModeToggle } from "../mode-toogle";
 import { IconUser } from "../icons";
 
 const Sidebar = () => {
-  const { userId } = useAuth();
+  const {} = useAuth();
   return (
     <Fragment>
       <div className="p-5 border-r border-r-gray-200 bg-white dark:bg-dark-card dark:border-opacity-10 flex flex-col">
@@ -33,16 +33,13 @@ const Sidebar = () => {
         {/* User Actions */}
         <div className="mt-auto flex items-center gap-3 p-3 border-t border-gray-200 dark:border-dark-border">
           <ModeToggle />
-          {userId ? (
-            <UserButton />
-          ) : (
-            <Link
-              href="/sign-in"
-              className="size-10 rounded-lg bg-primary text-white flex items-center justify-center p-1"
-            >
-              <IconUser></IconUser>
-            </Link>
-          )}
+          <UserButton />
+          <Link
+            href="/sign-in"
+            className="size-10 rounded-lg bg-primary text-white flex items-center justify-center p-1"
+          >
+            <IconUser></IconUser>
+          </Link>
         </div>
       </div>
     </Fragment>

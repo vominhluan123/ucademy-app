@@ -33,16 +33,13 @@ const Sidebar = () => {
         {/* User Actions */}
         <div className="mt-auto flex items-center gap-3 p-3 border-t border-gray-200 dark:border-dark-border">
           <ModeToggle />
-          {userId ? (
-            <UserButton />
-          ) : (
-            <Link
-              href="/sign-in"
-              className="size-10 rounded-lg bg-primary text-white flex items-center justify-center p-1"
-            >
-              <IconUser></IconUser>
-            </Link>
-          )}
+          <UserButton />
+          <Link
+            href="/sign-in"
+            className="size-10 rounded-lg bg-primary text-white flex items-center justify-center p-1"
+          >
+            <IconUser></IconUser>
+          </Link>
         </div>
       </div>
     </Fragment>

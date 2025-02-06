@@ -33,8 +33,9 @@ const Sidebar = () => {
         {/* User Actions */}
         <div className="mt-auto flex items-center gap-3 p-3 border-t border-gray-200 dark:border-dark-border">
           <ModeToggle />
+          <UserButton />
           {userId ? (
-            <UserButton />
+            <IconUser></IconUser>
           ) : (
             <Link
               href="/sign-in"
