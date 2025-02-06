@@ -24,7 +24,7 @@ const userSchema = new Schema<IUser>({
     unique: true,
     required: true,
   },
-  email: {
+  email__address: {
     type: String,
     unique: true,
     required: true,
@@ -38,7 +38,7 @@ const userSchema = new Schema<IUser>({
       rel: "course",
     },
   ],
-  created_at: {
+  creatdAt: {
     type: Date,
     default: Date.now,
   },

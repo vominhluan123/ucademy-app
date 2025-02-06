@@ -38,7 +38,7 @@ const userSchema = new Schema<IUser>({
       rel: "course",
     },
   ],
-  created_at: {
+  creatdAt: {
     type: Date,
     default: Date.now,
   },
