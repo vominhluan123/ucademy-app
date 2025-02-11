@@ -25,7 +25,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
-            <ToastContainer autoClose={2000} position="top-right" />
+            <ToastContainer />
           </ThemeProvider>
         </body>
       </html>

@@ -108,5 +108,5 @@ const courseSchema = new Schema<ICourse>({
   },
 });
 
-const Course = models.Course || model<ICourse>("Course", courseSchema);
-export default Course;
+const Coures = models.Coures || model<ICourse>("course", courseSchema);
+export default Coures;

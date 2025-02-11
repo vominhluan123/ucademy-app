@@ -35,7 +35,6 @@ const courseSchema = new Schema<ICourse>({
   },
   image: {
     type: String,
-    default: "",
   },
   slug: {
     type: String,
@@ -43,7 +42,6 @@ const courseSchema = new Schema<ICourse>({
   },
   intro_url: {
     type: String,
-    default: "",
   },
   desc: {
     type: String,
@@ -55,7 +53,6 @@ const courseSchema = new Schema<ICourse>({
   },
   sale_price: {
     type: Number,
-    default: 0,
   },
   status: {
     type: String,
@@ -108,5 +105,5 @@ const courseSchema = new Schema<ICourse>({
   },
 });
 
-const Course = models.Course || model<ICourse>("Course", courseSchema);
-export default Course;
+const Coures = models.Coures || model<ICourse>("course", courseSchema);
+export default Coures;

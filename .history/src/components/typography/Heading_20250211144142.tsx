@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import React from "react";
 
 const Heading = ({
@@ -8,11 +7,7 @@ const Heading = ({
   children: React.ReactNode;
   className?: string;
 }) => {
-  return (
-    <h1 className={cn("text-3xl font-bold lg:text-3xl", className)}>
-      {children}
-    </h1>
-  );
+  return <h1 className="text-3xl font-bold lg:text-3xl">{children}</h1>;
 };
 
 export default Heading;
