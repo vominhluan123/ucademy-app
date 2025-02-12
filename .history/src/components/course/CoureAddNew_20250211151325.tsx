@@ -1,4 +1,5 @@
 "use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -17,13 +18,12 @@ import slugify from "slugify";
 import { createCourse } from "@/lib/actions/course.action";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { IUser } from "@/database/user.model";
 const formSchema = z.object({
   title: z.string().min(10, "Tối đa 10 kí tự"),
   slug: z.string().optional(),
 });
 
-function CoureAddNew({ user }: { user: IUser }) {
+function CoureAddNew() {
   const router = useRouter();
   const [isSubmitting, setisSubmitting] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -40,12 +40,8 @@ function CoureAddNew({ user }: { user: IUser }) {
         title: values.title,
         slug:
           values.slug || slugify(values.title, { lower: true, locale: "vi" }),
-        author: user._id,
       };
       const res = await createCourse(data);
-      if (!res?.success) {
-        toast.error(res?.message);
-      }
       if (res?.success) {
         toast.success("Tạo khoá học thành công");
       }
@@ -56,6 +52,7 @@ function CoureAddNew({ user }: { user: IUser }) {
       console.log(error);
     } finally {
       setisSubmitting(false);
+      form.reset();
     }
   }
 

@@ -43,19 +43,17 @@ function CoureAddNew({ user }: { user: IUser }) {
         author: user._id,
       };
       const res = await createCourse(data);
-      if (!res?.success) {
-        toast.error(res?.message);
-      }
       if (res?.success) {
         toast.success("Tạo khoá học thành công");
       }
-      if (res?.data) {
-        router.push(`/manage/course/update?slug=${res.data.slug}`);
-      }
+      // if (res?.data) {
+      //   router.push(`/manage/course/update?slug=${res.data.slug}`);
+      // }
     } catch (error) {
       console.log(error);
     } finally {
       setisSubmitting(false);
+      form.reset();
     }
   }
 

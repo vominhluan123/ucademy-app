@@ -56,6 +56,7 @@ function CoureAddNew({ user }: { user: IUser }) {
       console.log(error);
     } finally {
       setisSubmitting(false);
+      form.reset();
     }
   }
 

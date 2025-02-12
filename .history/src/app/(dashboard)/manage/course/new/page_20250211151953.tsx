@@ -5,14 +5,13 @@ import { auth } from "@clerk/nextjs/server";
 import React, { Fragment } from "react";
 
 const page = async () => {
-  const { userId } = await auth();
+  const { userId } = auth();
   if (!userId) return null;
   const mongoUser = await getUserInfo({ userId });
-  if (!mongoUser) return null;
   return (
     <Fragment>
       <Heading>Tạo Khoá Học Mới</Heading>
-      <CoureAddNew user={JSON.parse(JSON.stringify(mongoUser))}></CoureAddNew>
+      <CoureAddNew user={}></CoureAddNew>
     </Fragment>
   );
 };

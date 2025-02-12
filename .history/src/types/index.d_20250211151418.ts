@@ -17,6 +17,5 @@ type TCreateUserParams = {
 type TcreateCourseParams = {
   title: string;
   slug: string;
-  author: string;
 };
 export { TActiveLinkProps, TMenueItem, TCreateUserParams, TcreateCourseParams };

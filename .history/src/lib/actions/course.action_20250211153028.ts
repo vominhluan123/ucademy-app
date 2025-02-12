@@ -16,7 +16,7 @@ export async function createCourse(params: TcreateCourseParams) {
     connectToDatabase();
     const existCourse = await Coures.findOne({ slug: params.slug });
     if (existCourse) {
-      return { success: false, message: "Đường dẫn khoá học đã tồn tại" };
+      return { success: false };
     }
     const course = await Coures.create(params);
     return {

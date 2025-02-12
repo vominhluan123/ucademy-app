@@ -11,7 +11,6 @@ const page = async ({
   };
 }) => {
   const findCourse = await getCourseBySlug({ slug: searchParams.slug });
-  if (!findCourse) return null;
   return (
     <Fragment>
       <Heading className="mb-8">Cập Nhật Khoá Học</Heading>

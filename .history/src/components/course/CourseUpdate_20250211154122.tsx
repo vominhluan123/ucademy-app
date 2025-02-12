@@ -1,4 +1,5 @@
 "use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -13,17 +14,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import slugify from "slugify";
 import { createCourse } from "@/lib/actions/course.action";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { IUser } from "@/database/user.model";
 const formSchema = z.object({
   title: z.string().min(10, "Tối đa 10 kí tự"),
   slug: z.string().optional(),
 });
-
-function CoureAddNew({ user }: { user: IUser }) {
+export const CourseUpdate = () => {
   const router = useRouter();
   const [isSubmitting, setisSubmitting] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -36,29 +34,12 @@ function CoureAddNew({ user }: { user: IUser }) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setisSubmitting(true);
     try {
-      const data = {
-        title: values.title,
-        slug:
-          values.slug || slugify(values.title, { lower: true, locale: "vi" }),
-        author: user._id,
-      };
-      const res = await createCourse(data);
-      if (!res?.success) {
-        toast.error(res?.message);
-      }
-      if (res?.success) {
-        toast.success("Tạo khoá học thành công");
-      }
-      if (res?.data) {
-        router.push(`/manage/course/update?slug=${res.data.slug}`);
-      }
     } catch (error) {
       console.log(error);
     } finally {
       setisSubmitting(false);
     }
   }
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} autoComplete="off">
@@ -114,5 +95,4 @@ function CoureAddNew({ user }: { user: IUser }) {
       </form>
     </Form>
   );
-}
-export default CoureAddNew;
+};

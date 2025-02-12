@@ -119,7 +119,6 @@ export const CourseUpdate = () => {
                 <FormLabel>Giá khuyến mãi</FormLabel>
                 <FormControl>
                   <Input
-                    type="number"
                     placeholder="5999000"
                     {...field}
                     className="w-full px-4 py-2 border font-medium dark:bg-dark-border  border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary  transition"
@@ -137,7 +136,6 @@ export const CourseUpdate = () => {
                 <FormLabel>Giá gốc</FormLabel>
                 <FormControl>
                   <Input
-                    type="number"
                     placeholder="9000.99"
                     {...field}
                     className="w-full px-4 py-2 border font-medium dark:bg-dark-border  border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary  transition"
@@ -202,9 +200,8 @@ export const CourseUpdate = () => {
                 <FormLabel>Lượt xem</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="1000"
+                    placeholder="https://www.youtube.com/"
                     {...field}
-                    type="number"
                     className="w-full px-4 py-2 border font-medium dark:bg-dark-border  border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary  transition"
                   />
                 </FormControl>
@@ -242,39 +239,6 @@ export const CourseUpdate = () => {
                     className="w-full px-4 py-2 border font-medium dark:bg-dark-border  border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary  transition"
                   />
                 </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="info.requirements"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Yêu cầu</FormLabel>
-                <FormControl></FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="info.benefits"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Lợi ích</FormLabel>
-                <FormControl></FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="info.qa"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Question/Answer</FormLabel>
-                <FormControl></FormControl>
                 <FormMessage />
               </FormItem>
             )}

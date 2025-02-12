@@ -40,12 +40,8 @@ function CoureAddNew({ user }: { user: IUser }) {
         title: values.title,
         slug:
           values.slug || slugify(values.title, { lower: true, locale: "vi" }),
-        author: user._id,
       };
       const res = await createCourse(data);
-      if (!res?.success) {
-        toast.error(res?.message);
-      }
       if (res?.success) {
         toast.success("Tạo khoá học thành công");
       }
@@ -56,6 +52,7 @@ function CoureAddNew({ user }: { user: IUser }) {
       console.log(error);
     } finally {
       setisSubmitting(false);
+      form.reset();
     }
   }
 

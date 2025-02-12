@@ -49,13 +49,14 @@ function CoureAddNew({ user }: { user: IUser }) {
       if (res?.success) {
         toast.success("Tạo khoá học thành công");
       }
-      if (res?.data) {
-        router.push(`/manage/course/update?slug=${res.data.slug}`);
-      }
+      // if (res?.data) {
+      //   router.push(`/manage/course/update?slug=${res.data.slug}`);
+      // }
     } catch (error) {
       console.log(error);
     } finally {
       setisSubmitting(false);
+      form.reset();
     }
   }
 

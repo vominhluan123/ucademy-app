@@ -246,39 +246,6 @@ export const CourseUpdate = () => {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="info.requirements"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Yêu cầu</FormLabel>
-                <FormControl></FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="info.benefits"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Lợi ích</FormLabel>
-                <FormControl></FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="info.qa"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Question/Answer</FormLabel>
-                <FormControl></FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
         </div>
 
         <Button

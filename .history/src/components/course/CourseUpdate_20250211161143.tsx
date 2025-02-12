@@ -43,7 +43,6 @@ const formSchema = z.object({
     benefits: z.array(z.string()).optional(),
     qa: z.array(z.object({ question: z.string(), answer: z.string() })),
   }),
-  views: z.number().int().positive().optional(),
 });
 export const CourseUpdate = () => {
   const [isSubmitting, setisSubmitting] = useState(false);
@@ -59,7 +58,6 @@ export const CourseUpdate = () => {
       image: "",
       status: ECourseStatus.PENDING,
       level: ECourseLevel.BEGINNER,
-      views: 0,
     },
   });
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -119,7 +117,6 @@ export const CourseUpdate = () => {
                 <FormLabel>Giá khuyến mãi</FormLabel>
                 <FormControl>
                   <Input
-                    type="number"
                     placeholder="5999000"
                     {...field}
                     className="w-full px-4 py-2 border font-medium dark:bg-dark-border  border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary  transition"
@@ -137,7 +134,6 @@ export const CourseUpdate = () => {
                 <FormLabel>Giá gốc</FormLabel>
                 <FormControl>
                   <Input
-                    type="number"
                     placeholder="9000.99"
                     {...field}
                     className="w-full px-4 py-2 border font-medium dark:bg-dark-border  border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary  transition"
@@ -154,11 +150,7 @@ export const CourseUpdate = () => {
               <FormItem>
                 <FormLabel>Mô tả khoá học</FormLabel>
                 <FormControl>
-                  <Textarea
-                    placeholder="Nhập mô tả"
-                    {...field}
-                    className="h-[200px]"
-                  />
+                  <Textarea placeholder="Nhập mô tả" {...field} className="" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -171,7 +163,20 @@ export const CourseUpdate = () => {
               <FormItem>
                 <FormLabel>Ảnh đại diện</FormLabel>
                 <FormControl>
-                  <div className=" border  rounded-lg dark:bg-dark-border  border-gray-300 dark:border-gray-600 h-[200px]"></div>
+                  <div className="h-20 border  dark:bg-dark-border  border-gray-300 dark:border-gray-600"></div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="image"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Ảnh đại diện</FormLabel>
+                <FormControl>
+                  <div className="h-20 border  dark:bg-dark-border  border-gray-300 dark:border-gray-600"></div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -187,24 +192,6 @@ export const CourseUpdate = () => {
                   <Input
                     placeholder="https://www.youtube.com/"
                     {...field}
-                    className="w-full px-4 py-2 border font-medium dark:bg-dark-border  border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary  transition"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="views"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Lượt xem</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="1000"
-                    {...field}
-                    type="number"
                     className="w-full px-4 py-2 border font-medium dark:bg-dark-border  border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary  transition"
                   />
                 </FormControl>
@@ -242,39 +229,6 @@ export const CourseUpdate = () => {
                     className="w-full px-4 py-2 border font-medium dark:bg-dark-border  border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary  transition"
                   />
                 </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="info.requirements"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Yêu cầu</FormLabel>
-                <FormControl></FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="info.benefits"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Lợi ích</FormLabel>
-                <FormControl></FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="info.qa"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Question/Answer</FormLabel>
-                <FormControl></FormControl>
                 <FormMessage />
               </FormItem>
             )}
