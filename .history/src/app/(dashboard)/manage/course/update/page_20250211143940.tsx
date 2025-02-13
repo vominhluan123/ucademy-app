@@ -10,7 +10,7 @@ const page = ({
   };
 }) => {
   return <Heading>Cập nhật khoá học</Heading>
-  <CourseUpdate></CourseUpdate>;
+  <CourseUpdate slug={searchParams.slug}></CourseUpdate>;
 };
 
 export default page;
