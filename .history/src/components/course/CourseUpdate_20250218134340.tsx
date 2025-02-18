@@ -29,8 +29,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { courseLevel, courseStatus } from "@/constants";
-import { UploadButton } from "@/utils/uploadthing";
-import Image from "next/image";
 
 const formSchema = z.object({
   title: z.string().min(10, "Tối đa 10 kí tự"),
@@ -87,6 +85,7 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
     },
   });
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log("🚀 ~ onSubmit ~ values:", courseInfo);
     setisSubmitting(true);
     try {
       const res = await updateCourse({
@@ -104,12 +103,9 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
             benefits: courseInfo.benefits,
             qa: courseInfo.qa,
           },
-          status: values.status,
-          level: values.level,
-          image: values.image,
         },
       });
-      if (values.slug !== data.slug) {
+      if (values.slug) {
         router.replace(`/manage/course/update?slug=${values.slug}`);
       }
       if (res?.success) {
@@ -121,7 +117,6 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
       setisSubmitting(false);
     }
   }
-  const imageWatch = form.watch("image");
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} autoComplete="off">
@@ -224,31 +219,7 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
               <FormItem>
                 <FormLabel>Ảnh đại diện</FormLabel>
                 <FormControl>
-                  <>
-                    <div className="relative border flex items-center justify-center rounded-lg dark:bg-dark-border  border-gray-300 dark:border-gray-600 h-[200px]">
-                      {!imageWatch ? (
-                        <UploadButton
-                          endpoint="imageUploader"
-                          onClientUploadComplete={(res) => {
-                            // Do something with the response
-                            form.setValue("image", res[0].ufsUrl);
-                            console.log(res);
-                          }}
-                          onUploadError={(error: Error) => {
-                            // Do something with the error.
-                            console.error(`ERROR! ${error.message}`);
-                          }}
-                        />
-                      ) : (
-                        <Image
-                          alt=""
-                          fill
-                          src={imageWatch}
-                          className="w-full object-cover"
-                        ></Image>
-                      )}
-                    </div>
-                  </>
+                  <div className=" border  rounded-lg dark:bg-dark-border  border-gray-300 dark:border-gray-600 h-[200px]"></div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -297,10 +268,7 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
               <FormItem>
                 <FormLabel>Trạng thái</FormLabel>
                 <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Trạng thái" />
                     </SelectTrigger>

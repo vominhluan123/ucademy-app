@@ -106,10 +106,9 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
           },
           status: values.status,
           level: values.level,
-          image: values.image,
         },
       });
-      if (values.slug !== data.slug) {
+      if (values.slug) {
         router.replace(`/manage/course/update?slug=${values.slug}`);
       }
       if (res?.success) {
@@ -225,7 +224,7 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
                 <FormLabel>Ảnh đại diện</FormLabel>
                 <FormControl>
                   <>
-                    <div className="relative border flex items-center justify-center rounded-lg dark:bg-dark-border  border-gray-300 dark:border-gray-600 h-[200px]">
+                    <div className=" border flex items-center justify-center rounded-lg dark:bg-dark-border  border-gray-300 dark:border-gray-600 h-[200px]">
                       {!imageWatch ? (
                         <UploadButton
                           endpoint="imageUploader"
@@ -240,12 +239,7 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
                           }}
                         />
                       ) : (
-                        <Image
-                          alt=""
-                          fill
-                          src={imageWatch}
-                          className="w-full object-cover"
-                        ></Image>
+                        <Image alt="" fill src={imageWatch}></Image>
                       )}
                     </div>
                   </>

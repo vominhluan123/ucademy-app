@@ -77,7 +77,7 @@ export const courseLevel: {
     value: ECourseLevel.ADVANCED,
   },
 ];
-export const courseLevelTitele: Record<ECourseLevel, string> = {
+export const courseLevelTitele = {
   [ECourseLevel.BEGINNER]: "Dễ",
   [ECourseLevel.INTERMEDIATE]: "Trung bình",
   [ECourseLevel.ADVANCED]: "Khó",

@@ -73,12 +73,7 @@ export const courseLevel: {
     value: ECourseLevel.INTERMEDIATE,
   },
   {
-    title: "Khó",
+    title: "Từ chối",
     value: ECourseLevel.ADVANCED,
   },
 ];
-export const courseLevelTitele: Record<ECourseLevel, string> = {
-  [ECourseLevel.BEGINNER]: "Dễ",
-  [ECourseLevel.INTERMEDIATE]: "Trung bình",
-  [ECourseLevel.ADVANCED]: "Khó",
-};

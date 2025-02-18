@@ -43,15 +43,12 @@ const page = async ({
               ></iframe>
             </>
           ) : (
-            <div className="relative w-full h-full">
-              <Image
-                src={data.image}
-                alt=""
-                layout="fill" // Sử dụng layout fill thay vì fill
-                objectFit="cover" // Đảm bảo ảnh không bị méo
-                className="rounded-lg"
-              />
-            </div>
+            <Image
+              src={data.image}
+              alt=""
+              fill
+              className="w-full h-full object-cover rounded-lg"
+            ></Image>
           )}
         </div>
         <h1 className="font-bold text-3xl mb-5 dark:text-dark-text">

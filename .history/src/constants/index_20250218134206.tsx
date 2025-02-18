@@ -65,20 +65,15 @@ export const courseLevel: {
   value: ECourseLevel;
 }[] = [
   {
-    title: "Dễ",
+    title: "Đã duyệt",
     value: ECourseLevel.BEGINNER,
   },
   {
-    title: "Trung bình",
+    title: "Chờ duyệt",
     value: ECourseLevel.INTERMEDIATE,
   },
   {
-    title: "Khó",
+    title: "Từ chối",
     value: ECourseLevel.ADVANCED,
   },
 ];
-export const courseLevelTitele: Record<ECourseLevel, string> = {
-  [ECourseLevel.BEGINNER]: "Dễ",
-  [ECourseLevel.INTERMEDIATE]: "Trung bình",
-  [ECourseLevel.ADVANCED]: "Khó",
-};

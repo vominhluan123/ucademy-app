@@ -38,9 +38,7 @@ const courseSchema = new Schema<ICourse>({
     default: "",
   },
   level: {
-    type: String,
-    enum: Object.values(ECourseLevel),
-    default: ECourseLevel.BEGINNER,
+    type: string,
   },
   slug: {
     type: String,

@@ -109,7 +109,7 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
           image: values.image,
         },
       });
-      if (values.slug !== data.slug) {
+      if (values.slug) {
         router.replace(`/manage/course/update?slug=${values.slug}`);
       }
       if (res?.success) {

@@ -31,7 +31,7 @@ const page = async ({
     <div className="grid lg:grid-cols-[2fr,1fr] gap-10 min-h-screen">
       <div>
         <div className="relative  aspect-video mb-5">
-          {!data.intro_url ? (
+          {data.intro_url ? (
             <>
               <iframe
                 width="1280"

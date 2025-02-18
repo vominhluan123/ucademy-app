@@ -12,7 +12,7 @@ const Sidebar = () => {
   const { userId } = useAuth();
   return (
     <Fragment>
-      <div className=" hidden p-5 border-r border-r-gray-200 bg-white dark:bg-dark-card dark:border-opacity-10 lg:flex flex-col fixed bottom-0 w-[300px] top-0 left-0 h-screen">
+      <div className=" hidden p-5 border-r border-r-gray-200 bg-white dark:bg-dark-card dark:border-opacity-10 lg:flex flex-col fixed bottom-0 top-0 left-0 h-screen">
         {/* Logo */}
         <Link href="/" className="font-bold text-3xl inline-block mb-5">
           <span className="text-primary">U</span>cademy

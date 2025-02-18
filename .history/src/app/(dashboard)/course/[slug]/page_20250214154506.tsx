@@ -1,4 +1,3 @@
-import PageNotFound from "@/app/not-found";
 import {
   IconCheck,
   IconPlay,
@@ -7,9 +6,7 @@ import {
   IconUser,
 } from "@/components/icons";
 import { Button } from "@/components/ui/button";
-import { courseLevelTitele } from "@/constants";
 import { getCourseBySlug } from "@/lib/actions/course.action";
-import { ECourseStatus } from "@/types/enum";
 import Image from "next/image";
 import React from "react";
 
@@ -25,13 +22,12 @@ const page = async ({
   if (!data) {
     return null;
   }
-  if (data.status !== ECourseStatus.APPROVED) return <PageNotFound />;
   const videoId = data.intro_url?.split("v=")[1];
   return (
-    <div className="grid lg:grid-cols-[2fr,1fr] gap-10 min-h-screen">
+    <div className="grid lg:grid-cols-[2fr,1fr] gap-10">
       <div>
-        <div className="relative  aspect-video mb-5">
-          {!data.intro_url ? (
+        <div className="relative aspect-video mb-5">
+          {data.intro_url ? (
             <>
               <iframe
                 width="1280"
@@ -43,15 +39,12 @@ const page = async ({
               ></iframe>
             </>
           ) : (
-            <div className="relative w-full h-full">
-              <Image
-                src={data.image}
-                alt=""
-                layout="fill" // Sử dụng layout fill thay vì fill
-                objectFit="cover" // Đảm bảo ảnh không bị méo
-                className="rounded-lg"
-              />
-            </div>
+            <Image
+              src="https://plus.unsplash.com/premium_photo-1738860330964-f64cdbdf7240?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw5fHx8ZW58MHx8fHx8"
+              alt=""
+              fill
+              className="w-full h-full object-cover rounded-lg"
+            ></Image>
           )}
         </div>
         <h1 className="font-bold text-3xl mb-5 dark:text-dark-text">
@@ -75,9 +68,7 @@ const page = async ({
           </div>
           <div className="bg-white rounded-lg p-5">
             <h4 className="text-sm text-slate-400 dark:text-dark">Trình độ</h4>
-            <h3 className="font-bold dark:text-dark">
-              {courseLevelTitele[data.level]}
-            </h3>
+            <h3 className="font-bold dark:text-dark">Trung bình</h3>
           </div>
           <div className="bg-white rounded-lg p-5">
             <h4 className="text-sm text-slate-400 dark:text-dark">

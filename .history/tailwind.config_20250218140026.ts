@@ -28,4 +28,4 @@ const config: Config = {
   },
   plugins: [require("tailwindcss-animate")],
 };
-export default withUt(config);
+export default config;

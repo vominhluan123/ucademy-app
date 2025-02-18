@@ -8,7 +8,6 @@ import {
 } from "@/components/icons";
 
 import { TMenueItem } from "@/types";
-import { ECourseLevel, ECourseStatus } from "@/types/enum";
 
 export const MenuIcons: TMenueItem[] = [
   {
@@ -44,41 +43,14 @@ export const MenuIcons: TMenueItem[] = [
 ];
 export const courseStatus: {
   title: string;
-  value: ECourseStatus;
 }[] = [
   {
     title: "Đã duyệt",
-    value: ECourseStatus.APPROVED,
   },
   {
     title: "Chờ duyệt",
-    value: ECourseStatus.PENDING,
   },
   {
     title: "Từ chối",
-    value: ECourseStatus.REJECTED,
   },
 ];
-
-export const courseLevel: {
-  title: string;
-  value: ECourseLevel;
-}[] = [
-  {
-    title: "Dễ",
-    value: ECourseLevel.BEGINNER,
-  },
-  {
-    title: "Trung bình",
-    value: ECourseLevel.INTERMEDIATE,
-  },
-  {
-    title: "Khó",
-    value: ECourseLevel.ADVANCED,
-  },
-];
-export const courseLevelTitele: Record<ECourseLevel, string> = {
-  [ECourseLevel.BEGINNER]: "Dễ",
-  [ECourseLevel.INTERMEDIATE]: "Trung bình",
-  [ECourseLevel.ADVANCED]: "Khó",
-};
