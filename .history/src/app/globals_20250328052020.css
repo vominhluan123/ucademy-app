@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-100 dark:bg-dark;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  :root {
+    --radius: 0.5rem;
+  }
+}
+@layer components {
+  .svg-icon {
+    stroke-dashoffset: 100;
+    stroke-dasharray: 100;
+    animation: dash 1.5s linear forwards;
+  }
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+}
