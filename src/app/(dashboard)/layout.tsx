@@ -9,16 +9,18 @@ const layout = ({ children }: { children: React.ReactNode }) => {
       <div className="hidden lg:block"></div>
       <Sidebar></Sidebar>
       <ul className="fixed bottom-0 left-0 w-full bg-white dark:bg-dark-card dark:border-opacity-1 p-3 h-16 lg:hidden flex justify-center gap-6 z-50 shadow-md">
-        {MenuIcons.map((item, index) => (
-          <MenuItems
-            key={index}
-            url={item.url}
-            title={item.title}
-            icon={item.icon}
-            onlyIcon={true}
-          />
-        ))}
-        <ToggleUser />
+        <div className="flex">
+          {MenuIcons.map((item, index) => (
+            <MenuItems
+              key={index}
+              url={item.url}
+              title={item.title}
+              icon={item.icon}
+              onlyIcon={true}
+            />
+          ))}
+          <ToggleUser />
+        </div>
       </ul>
       <main className="p-5">{children}</main>
     </div>
