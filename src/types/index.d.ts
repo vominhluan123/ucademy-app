@@ -37,7 +37,7 @@ type TDeleteLectureParams = {
   lectureId: string;
   updateData: {
     title?: string;
-    order?: string;
+    order?: number;
     _destroy?: boolean;
     path?: string;
   };

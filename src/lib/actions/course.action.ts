@@ -1,5 +1,6 @@
 "use server";
 import Course, { ICourse } from "@/database/course.model";
+import Lecture from "@/database/lecture.model";
 import { TcreateCourseParams, TUpdateCourseParams } from "@/types";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
@@ -21,8 +22,20 @@ export async function getCourseBySlug({
   slug: string;
 }): Promise<ICourse | undefined> {
   try {
-    connectToDatabase();
-    const findCourse = await Course.findOne({ slug }).populate("lectures");
+    await connectToDatabase();
+    const findCourse = await Course.findOne({ slug })
+      .populate({
+        path: "lectures",
+        model: Lecture,
+        select: "_id title order",
+        match: { _destroy: false },
+      })
+      .exec();
+    if (!findCourse) {
+      console.log("Course not found for slug:", slug);
+    } else {
+      console.log("Course found:", findCourse);
+    }
     return findCourse;
   } catch (error) {
     console.log(error);

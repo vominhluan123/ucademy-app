@@ -9,9 +9,9 @@ import { commonClassName } from "@/constants";
 import { createLecture, DeleteLecture } from "@/lib/actions/lecture.action";
 import { MouseEvent } from "react";
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
 import { IconDelete, IconEdit } from "../icons";
 import { Button } from "../ui/button";
+import Swal from "sweetalert2";
 const CoureUpdateContent = ({ course }: { course: any }) => {
   const lectures = course?.lectures || [];
   console.log("🚀 ~ CoureUpdateContent ~ lectures:", lectures);
@@ -57,11 +57,10 @@ const CoureUpdateContent = ({ course }: { course: any }) => {
           if (res?.success) {
             toast.success("Xóa chương thành công!");
           }
-        }
+        } 
+        
       });
-    } catch (error) {
-      console.error(error);
-    }
+     
   };
   return (
     <>

@@ -29,7 +29,6 @@ export async function DeleteLecture(params: TDeleteLectureParams) {
     await Lecture.findByIdAndUpdate(params.lectureId, params.updateData, {
       new: true,
     });
-    revalidatePath(params.updateData.path || "/");
     return {
       success: true,
     };

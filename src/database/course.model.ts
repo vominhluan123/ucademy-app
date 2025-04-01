@@ -1,6 +1,5 @@
 import { ECourseLevel, ECourseStatus } from "@/types/enum";
 import { Document, model, models, Schema } from "mongoose";
-
 export interface ICourse extends Document {
   _id: string;
   title: string;
@@ -48,7 +47,6 @@ const courseSchema = new Schema<ICourse>({
   },
   intro_url: {
     type: String,
-    default: null,
   },
   desc: {
     type: String,
@@ -71,7 +69,7 @@ const courseSchema = new Schema<ICourse>({
   },
   author: {
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: "Users",
   },
   lectures: [
     {
