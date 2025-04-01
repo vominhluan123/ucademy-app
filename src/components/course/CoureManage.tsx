@@ -199,7 +199,7 @@ const CoureManage = ({ course }: { course: ICourse[] }) => {
                     <TableCell>
                       <div className="flex flex-wrap gap-2 sm:gap-3">
                         <Link
-                          href={`/manage/course/update-content`}
+                          href={`/manage/course/update-content?slug=${course.slug}`}
                           className={commonClassName.action}
                           target="_blank"
                         >

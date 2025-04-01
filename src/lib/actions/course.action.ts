@@ -1,5 +1,5 @@
 "use server";
-import Coures, { ICourse } from "@/database/course.model";
+import Course, { ICourse } from "@/database/course.model";
 import { TcreateCourseParams, TUpdateCourseParams } from "@/types";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
@@ -7,7 +7,7 @@ import { connectToDatabase } from "../mongoose";
 export async function getAllCourses(): Promise<ICourse[] | undefined> {
   try {
     connectToDatabase();
-    const Courses = await Coures.find();
+    const Courses = await Course.find();
     return Courses;
   } catch (error) {
     console.log("🚀 ~ getAllCourses ~ error:", error);
@@ -22,7 +22,7 @@ export async function getCourseBySlug({
 }): Promise<ICourse | undefined> {
   try {
     connectToDatabase();
-    const findCourse = await Coures.findOne({ slug });
+    const findCourse = await Course.findOne({ slug }).populate("lectures");
     return findCourse;
   } catch (error) {
     console.log(error);
@@ -31,11 +31,11 @@ export async function getCourseBySlug({
 export async function createCourse(params: TcreateCourseParams) {
   try {
     connectToDatabase();
-    const existCourse = await Coures.findOne({ slug: params.slug });
+    const existCourse = await Course.findOne({ slug: params.slug });
     if (existCourse) {
       return { success: false, message: "Đường dẫn khoá học đã tồn tại" };
     }
-    const course = await Coures.create(params);
+    const course = await Course.create(params);
     return {
       success: true,
       data: JSON.parse(JSON.stringify(course)),
@@ -48,9 +48,9 @@ export async function createCourse(params: TcreateCourseParams) {
 export async function updateCourse(params: TUpdateCourseParams) {
   try {
     connectToDatabase();
-    const findCourse = await Coures.findOne({ slug: params.slug });
+    const findCourse = await Course.findOne({ slug: params.slug });
     if (!findCourse) return;
-    await Coures.findOneAndUpdate({ slug: params.slug }, params.updateData, {
+    await Course.findOneAndUpdate({ slug: params.slug }, params.updateData, {
       new: true,
     });
     revalidatePath(params.path || "/");

@@ -94,13 +94,13 @@ const page = async ({
         <div className="bg-white rounded-lg p-3 md:p-5 dark:bg-dark-card">
           <div className="flex items-center gap-2 mb-3">
             <strong className="text-primary text-xl font-bold dark:text-white">
-              {data.price}
+              {data.sale_price}
             </strong>
             <span className="text-slate-400 line-through text-sm dark:text-white">
-              {data.sale_price}
+              {data.price}
             </span>
             <span className="ml-auto font-semibold text-sm inline-block px-3 py-1 rounded-lg bg-primary text-primary bg-opacity-10 dark:text-white">
-              {Math.floor((data.price / data.sale_price) * 100)}%
+              {Math.floor(((data.price - data.sale_price) / data.price) * 100)}%
             </span>
           </div>
           <h3 className="font-bold mb-3 dark:text-white">Khoá học gồm có:</h3>

@@ -48,9 +48,20 @@ const CourseItem = ({ data }: { data: ICourse }) => {
             <IconClock className="w-4 h-4" />
             3h30
           </span>
-          <span className="font-bold text-primary dark:text-dark-text text-base">
-            {data.price.toLocaleString()}đ
-          </span>
+          <div className="font-bold text-primary dark:text-dark-text text-base">
+            {data.sale_price ? (
+              <>
+                <span style={{ textDecoration: "line-through", color: "gray" }}>
+                  {data.price.toLocaleString()}đ
+                </span>
+                <span className=" text-primary font-bold text-lg ml-2">
+                  {data.sale_price.toLocaleString()}đ
+                </span>
+              </>
+            ) : (
+              <span>{data.price.toLocaleString()}đ</span>
+            )}
+          </div>
         </div>
 
         {/* Nút xem chi tiết */}
