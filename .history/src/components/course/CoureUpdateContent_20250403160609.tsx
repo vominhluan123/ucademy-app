@@ -94,11 +94,11 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
       {lectures.map((lecture: ILecture, index) => (
         <Accordion
           type="single"
-          collapsible={!lectureIdEdit}
+          collapsible
           className="w-full"
           key={lecture._id}
         >
-          <AccordionItem value={lecture._id}>
+          <AccordionItem value="item-1">
             <AccordionTrigger>
               <div className="flex gap-3 items-center w-full justify-between pr-5">
                 {lecture._id === lectureIdEdit ? (
@@ -135,7 +135,7 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                           </svg>
                         </span>
                         <span
-                          className={cn(commonClassName.action, "text-red-500")}
+                          className={commonClassName.action}
                           onClick={(e) => {
                             e.stopPropagation();
                             setLectureIdEdit("");
@@ -164,7 +164,7 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                     <div>{lecture.title || "Chương Mới"} </div>
                     <div className="flex gap-2">
                       <span
-                        className={cn(commonClassName.action, "text-blue-500")}
+                        className={commonClassName.action}
                         onClick={(e) => {
                           e.stopPropagation();
                           setLectureIdEdit(lecture._id);
@@ -173,7 +173,7 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                         <IconEdit />
                       </span>
                       <span
-                        className={cn(commonClassName.action, "text-red-500")}
+                        className={commonClassName.action}
                         onClick={(e) => hanlderDeleteLecture(e, lecture._id)}
                       >
                         <IconDelete />

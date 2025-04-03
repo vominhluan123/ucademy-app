@@ -26,13 +26,9 @@ export async function createLecture(params: TUpdateLectureParams) {
 export async function DeleteLecture(params: TDeleteLectureParams) {
   try {
     connectToDatabase();
-    const res = await Lecture.findByIdAndUpdate(
-      params.lectureId,
-      params.updateData,
-      {
-        new: true,
-      }
-    );
+    await Lecture.findByIdAndUpdate(params.lectureId, params.updateData, {
+      new: true,
+    });
     revalidatePath(params.updateData.path || "/");
     if (!res) return;
     return {

@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { ILecture } from "@/database/lecture.model";
 import { getCourseBySlug } from "@/lib/actions/course.action";
 import { ECourseStatus } from "@/types/enum";
 import Image from "next/image";
@@ -25,6 +26,7 @@ const page = async ({
   }
   if (data.status !== ECourseStatus.APPROVED) return <PageNotFound />;
   const videoId = data.intro_url?.split("v=")[1];
+  const lectures = data?.lectures || [];
   return (
     <div className="flex flex-col md:grid md:grid-cols-[2fr,1fr] gap-5 lg:gap-10 min-h-screen">
       <div>
@@ -55,6 +57,28 @@ const page = async ({
         <h2 className="font-bold text-xl mb-2 dark:text-dark-text">Mô tả</h2>
         <div className="leading-normal mb-10 dark:text-dark-text">
           {data.desc}
+        </div>{" "}
+        <h2 className="font-bold text-xl mb-2 dark:text-dark-text">
+          Nội dung khoá học
+        </h2>
+        <div className="leading-normal mb-10 dark:text-dark-text">
+          {lectures.map((lecture: ILecture) => (
+            <Accordion
+              type="single"
+              collapsible
+              className="w-full"
+              key={lecture._id}
+            >
+              <AccordionItem value={lecture._id}>
+                <AccordionTrigger>
+                  <div className="flex gap-3 items-center w-full justify-between pr-5">
+                    <div>{lecture.title || "Chương Mới"} </div>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent></AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          ))}
         </div>
         <h2 className="font-bold text-xl mb-2 dark:text-dark-text">Yêu cầu</h2>
         <div className="leading-normal mb-10 dark:text-dark-text">

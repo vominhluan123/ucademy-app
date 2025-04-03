@@ -1,4 +1,5 @@
 import { ICourse } from "@/database/course.model";
+import { ILecture } from "@/database/lecture.model";
 
 type TActiveLinkProps = {
   url: string;
@@ -30,7 +31,7 @@ type TUpdateCourseParams = {
 type TUpdateLectureParams = {
   course: string;
   title?: string;
-  order?: string;
+  order?: number;
   path?: string;
 };
 type TDeleteLectureParams = {
@@ -42,8 +43,12 @@ type TDeleteLectureParams = {
     path?: string;
   };
 };
+interface TCourseUpdateParams extends Omit<ICourse, "lectures"> {
+  lectures: ILecture[];
+}
 export {
   TActiveLinkProps,
+  TCourseUpdateParams,
   TcreateCourseParams,
   TCreateUserParams,
   TDeleteLectureParams,

@@ -94,7 +94,7 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
       {lectures.map((lecture: ILecture, index) => (
         <Accordion
           type="single"
-          collapsible={!lectureIdEdit}
+          collapsible
           className="w-full"
           key={lecture._id}
         >

@@ -8,7 +8,6 @@ import {
 import { commonClassName } from "@/constants";
 import { ILecture } from "@/database/lecture.model";
 import { createLecture, DeleteLecture } from "@/lib/actions/lecture.action";
-import { cn } from "@/lib/utils";
 import { TCourseUpdateParams } from "@/types";
 import { MouseEvent, useState } from "react";
 import { toast } from "react-toastify";
@@ -94,11 +93,11 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
       {lectures.map((lecture: ILecture, index) => (
         <Accordion
           type="single"
-          collapsible={!lectureIdEdit}
+          collapsible
           className="w-full"
           key={lecture._id}
         >
-          <AccordionItem value={lecture._id}>
+          <AccordionItem value="item-1">
             <AccordionTrigger>
               <div className="flex gap-3 items-center w-full justify-between pr-5">
                 {lecture._id === lectureIdEdit ? (
@@ -111,10 +110,7 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                       />
                       <div className="flex gap-2">
                         <span
-                          className={cn(
-                            commonClassName.action,
-                            "text-green-500"
-                          )}
+                          className={commonClassName.action}
                           onClick={(e) => {
                             hanlderUpdateLecture(e, lecture._id);
                           }}
@@ -135,7 +131,7 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                           </svg>
                         </span>
                         <span
-                          className={cn(commonClassName.action, "text-red-500")}
+                          className={commonClassName.action}
                           onClick={(e) => {
                             e.stopPropagation();
                             setLectureIdEdit("");
@@ -164,7 +160,7 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                     <div>{lecture.title || "Chương Mới"} </div>
                     <div className="flex gap-2">
                       <span
-                        className={cn(commonClassName.action, "text-blue-500")}
+                        className={commonClassName.action}
                         onClick={(e) => {
                           e.stopPropagation();
                           setLectureIdEdit(lecture._id);
@@ -173,7 +169,7 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                         <IconEdit />
                       </span>
                       <span
-                        className={cn(commonClassName.action, "text-red-500")}
+                        className={commonClassName.action}
                         onClick={(e) => hanlderDeleteLecture(e, lecture._id)}
                       >
                         <IconDelete />

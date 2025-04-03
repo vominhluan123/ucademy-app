@@ -94,11 +94,11 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
       {lectures.map((lecture: ILecture, index) => (
         <Accordion
           type="single"
-          collapsible={!lectureIdEdit}
+          collapsible
           className="w-full"
           key={lecture._id}
         >
-          <AccordionItem value={lecture._id}>
+          <AccordionItem value="item-1">
             <AccordionTrigger>
               <div className="flex gap-3 items-center w-full justify-between pr-5">
                 {lecture._id === lectureIdEdit ? (

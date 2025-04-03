@@ -60,7 +60,7 @@ const CoureManage = ({ course }: { course: ICourse[] }) => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await updateCourse({
+        const res = await updateCourse({
           slug,
           updateData: {
             status: ECourseStatus.PENDING,
@@ -68,7 +68,9 @@ const CoureManage = ({ course }: { course: ICourse[] }) => {
           },
           path: "/manage/course",
         });
-        toast.success("Xoá khoá học thành công");
+        if (res?.success) {
+          toast.success("Xoá khoá học thành công");
+        }
       }
     });
   };
@@ -87,9 +89,10 @@ const CoureManage = ({ course }: { course: ICourse[] }) => {
           await updateCourse({
             slug,
             updateData: {
-              status: ECourseStatus.PENDING
-                ? ECourseStatus.APPROVED
-                : ECourseStatus.PENDING,
+              status:
+                status === ECourseStatus.PENDING
+                  ? ECourseStatus.APPROVED
+                  : ECourseStatus.PENDING,
               _destroy: false,
             },
             path: "/manage/course",
