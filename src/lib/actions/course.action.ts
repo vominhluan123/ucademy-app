@@ -1,6 +1,7 @@
 "use server";
 import Course, { ICourse } from "@/database/course.model";
 import Lecture from "@/database/lecture.model";
+import Lesson from "@/database/lesson.modal";
 import {
   TCourseUpdateParams,
   TcreateCourseParams,
@@ -33,6 +34,11 @@ export async function getCourseBySlug({
         model: Lecture,
         select: "_id title order",
         match: { _destroy: false },
+        populate: {
+          path: "lessons",
+          model: Lesson,
+          match: { _destroy: false },
+        },
       })
       .exec();
     if (!findCourse) {

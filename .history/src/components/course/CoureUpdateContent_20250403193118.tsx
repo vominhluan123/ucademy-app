@@ -6,7 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { commonClassName } from "@/constants";
-import { ILesson } from "@/database/lesson.modal";
+import { ILecture } from "@/database/lecture.model";
 import { createLecture, DeleteLecture } from "@/lib/actions/lecture.action";
 import { createLesson } from "@/lib/actions/lesson.action";
 import { cn } from "@/lib/utils";
@@ -113,7 +113,7 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
   return (
     <>
       <div className="flex flex-col gap-5">
-        {lectures.map((lecture: any) => (
+        {lectures.map((lecture: ILecture) => (
           <div key={lecture._id}>
             <Accordion
               type="single"
@@ -216,12 +216,12 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                     )}
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="border-none bg-transparent">
-                  {lecture.lessons.map((lesson: ILesson) => (
+                <AccordionContent>
+                  {lecture.lessons.map((lesson) => (
                     <Accordion type="single" collapsible key={lesson._id}>
                       <AccordionItem value={lesson._id}>
                         <AccordionTrigger>{lesson.title}</AccordionTrigger>
-                        <AccordionContent>123456</AccordionContent>
+                        <AccordionContent></AccordionContent>
                       </AccordionItem>
                     </Accordion>
                   ))}

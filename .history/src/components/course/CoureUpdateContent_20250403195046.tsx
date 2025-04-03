@@ -10,7 +10,7 @@ import { ILesson } from "@/database/lesson.modal";
 import { createLecture, DeleteLecture } from "@/lib/actions/lecture.action";
 import { createLesson } from "@/lib/actions/lesson.action";
 import { cn } from "@/lib/utils";
-import { TCourseUpdateParams } from "@/types";
+import { TCourseUpdateParams, TUpdateCoureseLecture } from "@/types";
 import { MouseEvent, useState } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -113,7 +113,7 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
   return (
     <>
       <div className="flex flex-col gap-5">
-        {lectures.map((lecture: any) => (
+        {lectures.map((lecture: TUpdateCoureseLecture) => (
           <div key={lecture._id}>
             <Accordion
               type="single"
@@ -216,7 +216,7 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                     )}
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="border-none bg-transparent">
+                <AccordionContent className="border-none">
                   {lecture.lessons.map((lesson: ILesson) => (
                     <Accordion type="single" collapsible key={lesson._id}>
                       <AccordionItem value={lesson._id}>

@@ -216,12 +216,12 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                     )}
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="border-none bg-transparent">
+                <AccordionContent>
                   {lecture.lessons.map((lesson: ILesson) => (
                     <Accordion type="single" collapsible key={lesson._id}>
                       <AccordionItem value={lesson._id}>
                         <AccordionTrigger>{lesson.title}</AccordionTrigger>
-                        <AccordionContent>123456</AccordionContent>
+                        <AccordionContent></AccordionContent>
                       </AccordionItem>
                     </Accordion>
                   ))}

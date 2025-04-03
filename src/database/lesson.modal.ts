@@ -55,7 +55,7 @@ const lessonSchema = new Schema<ILesson>({
   },
   course: {
     type: Schema.Types.ObjectId,
-    ref: "Courses",
+    ref: "Course",
     required: true,
   },
   type: {
