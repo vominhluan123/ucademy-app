@@ -171,7 +171,6 @@ export const LessonItemUpdate = ({ lesson }: { lesson: ILesson }) => {
                             Promise.reject("See docs to implement AI Assistant")
                           ),
                       }}
-                      placeholder="Nội dung bài học"
                     />
                   </FormControl>
                 </FormItem>

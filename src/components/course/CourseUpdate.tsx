@@ -272,6 +272,9 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
                   <Input
                     placeholder="https://www.youtube.com/"
                     {...field}
+                    spellCheck={false} // Tắt kiểm tra chính tả
+                    autoCorrect="off" // Tắt tự động sửa lỗi
+                    autoCapitalize="none" // Tắt viết hoa tự động
                     className="w-full px-4 py-2 border font-medium dark:bg-dark-border  border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary  transition"
                   />
                 </FormControl>

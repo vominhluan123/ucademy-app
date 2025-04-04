@@ -105,13 +105,11 @@ export const LessonItemUpdate = ({ lesson }: { lesson: ILesson }) => {
               control={form.control}
               name="content"
               render={({ field }) => (
-                <FormItem className="col-span-2">
+                <FormItem>
                   <FormLabel>Nội dung</FormLabel>
                   <FormControl>
                     <Editor
-                      value={field.value}
-                      onEditorChange={(content: any) => field.onChange(content)}
-                      apiKey={process.env.NEXT_PUBLIC_TINY_MCE_API_KEY}
+                      apiKey={process.env.TINY_MCE_API_KEY}
                       init={{
                         plugins: [
                           // Core editing features
@@ -136,6 +134,7 @@ export const LessonItemUpdate = ({ lesson }: { lesson: ILesson }) => {
                           "formatpainter",
                           "pageembed",
                           "a11ychecker",
+                          "tinymcespellchecker",
                           "permanentpen",
                           "powerpaste",
                           "advtable",
@@ -158,27 +157,25 @@ export const LessonItemUpdate = ({ lesson }: { lesson: ILesson }) => {
                         ],
                         toolbar:
                           "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
-                        browser_spellcheck: false,
-                        contextmenu: false,
                         tinycomments_mode: "embedded",
                         tinycomments_author: "Author name",
                         mergetags_list: [
                           { value: "First.Name", title: "First Name" },
                           { value: "Email", title: "Email" },
                         ],
-                        ai_request: (request: any, respondWith: any) =>
+                        ai_request: (request, respondWith) =>
                           respondWith.string(() =>
                             Promise.reject("See docs to implement AI Assistant")
                           ),
                       }}
-                      placeholder="Nội dung bài học"
+                      initialValue="Welcome to TinyMCE!"
                     />
                   </FormControl>
                 </FormItem>
               )}
             />
           </div>
-          <div className="flex justify-end gap-5 items-center mt-8">
+          <div className="flex justify-end gap-5 items-center">
             <Button type="submit">Cập nhật</Button>
             <Link href="/" className="text-sm text-slate-600">
               Xem trước

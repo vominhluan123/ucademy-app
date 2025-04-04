@@ -110,7 +110,6 @@ export const LessonItemUpdate = ({ lesson }: { lesson: ILesson }) => {
                   <FormControl>
                     <Editor
                       value={field.value}
-                      onEditorChange={(content: any) => field.onChange(content)}
                       apiKey={process.env.NEXT_PUBLIC_TINY_MCE_API_KEY}
                       init={{
                         plugins: [
@@ -171,7 +170,7 @@ export const LessonItemUpdate = ({ lesson }: { lesson: ILesson }) => {
                             Promise.reject("See docs to implement AI Assistant")
                           ),
                       }}
-                      placeholder="Nội dung bài học"
+                      initialValue="Welcome to TinyMCE!"
                     />
                   </FormControl>
                 </FormItem>

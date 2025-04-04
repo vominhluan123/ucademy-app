@@ -109,8 +109,7 @@ export const LessonItemUpdate = ({ lesson }: { lesson: ILesson }) => {
                   <FormLabel>Nội dung</FormLabel>
                   <FormControl>
                     <Editor
-                      value={field.value}
-                      onEditorChange={(content: any) => field.onChange(content)}
+                      spellcheck="false"
                       apiKey={process.env.NEXT_PUBLIC_TINY_MCE_API_KEY}
                       init={{
                         plugins: [
@@ -136,6 +135,7 @@ export const LessonItemUpdate = ({ lesson }: { lesson: ILesson }) => {
                           "formatpainter",
                           "pageembed",
                           "a11ychecker",
+                          "tinymcespellchecker",
                           "permanentpen",
                           "powerpaste",
                           "advtable",
@@ -158,8 +158,6 @@ export const LessonItemUpdate = ({ lesson }: { lesson: ILesson }) => {
                         ],
                         toolbar:
                           "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
-                        browser_spellcheck: false,
-                        contextmenu: false,
                         tinycomments_mode: "embedded",
                         tinycomments_author: "Author name",
                         mergetags_list: [
@@ -171,7 +169,7 @@ export const LessonItemUpdate = ({ lesson }: { lesson: ILesson }) => {
                             Promise.reject("See docs to implement AI Assistant")
                           ),
                       }}
-                      placeholder="Nội dung bài học"
+                      initialValue="Welcome to TinyMCE!"
                     />
                   </FormControl>
                 </FormItem>
