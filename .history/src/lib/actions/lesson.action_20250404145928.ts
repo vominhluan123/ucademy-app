@@ -49,6 +49,10 @@ export async function updateLesson(params: TUpdateLessonParams) {
       {
         new: true,
       }
+      return {
+        success: true,
+
+      }
     );
     revalidatePath(params.path || "/");
     if (!res) {
@@ -57,9 +61,6 @@ export async function updateLesson(params: TUpdateLessonParams) {
         message: "Cập nhật chương học thất bại",
       };
     }
-    return {
-      success: true,
-    };
   } catch (error) {
     console.error(error);
   }

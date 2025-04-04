@@ -50,16 +50,13 @@ export async function updateLesson(params: TUpdateLessonParams) {
         new: true,
       }
     );
-    revalidatePath(params.path || "/");
     if (!res) {
       return {
         success: false,
         message: "Cập nhật chương học thất bại",
       };
     }
-    return {
-      success: true,
-    };
+    revalidatePath(params.path || "/");
   } catch (error) {
     console.error(error);
   }

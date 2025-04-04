@@ -43,23 +43,8 @@ export async function createLesson(params: TCreateLessonParams) {
 export async function updateLesson(params: TUpdateLessonParams) {
   try {
     connectToDatabase();
-    const res = await Lesson.findByIdAndUpdate(
-      params.lessonId,
-      params.updateData,
-      {
-        new: true,
-      }
-    );
+
     revalidatePath(params.path || "/");
-    if (!res) {
-      return {
-        success: false,
-        message: "Cập nhật chương học thất bại",
-      };
-    }
-    return {
-      success: true,
-    };
   } catch (error) {
     console.error(error);
   }

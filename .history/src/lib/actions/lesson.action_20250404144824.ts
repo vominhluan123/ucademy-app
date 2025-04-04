@@ -51,15 +51,6 @@ export async function updateLesson(params: TUpdateLessonParams) {
       }
     );
     revalidatePath(params.path || "/");
-    if (!res) {
-      return {
-        success: false,
-        message: "Cập nhật chương học thất bại",
-      };
-    }
-    return {
-      success: true,
-    };
   } catch (error) {
     console.error(error);
   }

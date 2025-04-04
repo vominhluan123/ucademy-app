@@ -39,6 +39,7 @@ const lessonSchema = new Schema<ILesson>({
   },
   video_url: {
     type: String,
+    default: "",
   },
   _destroy: {
     type: Boolean,

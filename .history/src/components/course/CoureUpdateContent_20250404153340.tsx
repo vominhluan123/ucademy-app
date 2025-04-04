@@ -16,7 +16,6 @@ import { toast } from "react-toastify";
 import slugify from "slugify";
 import Swal from "sweetalert2";
 import { IconCancel, IconCheck, IconDelete, IconEdit } from "../icons";
-import { LessonItemUpdate } from "../lesson/LessonItemUpdate";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {

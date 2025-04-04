@@ -13,10 +13,8 @@ import { cn } from "@/lib/utils";
 import { TCourseUpdateParams } from "@/types";
 import { MouseEvent, useState } from "react";
 import { toast } from "react-toastify";
-import slugify from "slugify";
 import Swal from "sweetalert2";
 import { IconCancel, IconCheck, IconDelete, IconEdit } from "../icons";
-import { LessonItemUpdate } from "../lesson/LessonItemUpdate";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
@@ -117,15 +115,10 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
     try {
       const res = await updateLesson({
         lessonId,
+        path: `manage/course/update-content?slug=${course.slug}`,
         updateData: {
           title: lessonEdit,
-          slug: slugify(lessonEdit, {
-            lower: true,
-            locale: "vi",
-            remove: /[*+~.()'"!:@]/g,
-          }),
         },
-        path: `manage/course/update-content?slug=${course.slug}`,
       });
       if (res?.success) {
         toast.success("Cập nhật bài học thành công!");
@@ -300,9 +293,7 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                             </div>
                           </div>
                         </AccordionTrigger>
-                        <AccordionContent>
-                          <LessonItemUpdate lesson={lesson} />
-                        </AccordionContent>
+                        <AccordionContent>123456</AccordionContent>
                       </AccordionItem>
                     </Accordion>
                   ))}

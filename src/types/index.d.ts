@@ -46,6 +46,17 @@ type TDeleteLectureParams = {
 export interface TCourseUpdateParams extends Omit<ICourse, "lectures"> {
   lectures: ILecture[];
 }
+export type TUpdateLessonParams = {
+  lessonId: string;
+  updateData: {
+    title?: string;
+    slug?: string;
+    duration?: number;
+    video_url?: string;
+    content?: string;
+  };
+  path?: string;
+};
 export type TCreateLessonParams = {
   lecture: string;
   course: string;

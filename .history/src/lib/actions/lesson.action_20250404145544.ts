@@ -48,18 +48,16 @@ export async function updateLesson(params: TUpdateLessonParams) {
       params.updateData,
       {
         new: true,
+        success: true,
       }
     );
-    revalidatePath(params.path || "/");
     if (!res) {
       return {
         success: false,
         message: "Cập nhật chương học thất bại",
       };
     }
-    return {
-      success: true,
-    };
+    revalidatePath(params.path || "/");
   } catch (error) {
     console.error(error);
   }

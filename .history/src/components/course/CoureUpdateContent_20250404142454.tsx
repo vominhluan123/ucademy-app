@@ -8,15 +8,13 @@ import {
 import { commonClassName } from "@/constants";
 import { ILesson } from "@/database/lesson.modal";
 import { createLecture, DeleteLecture } from "@/lib/actions/lecture.action";
-import { createLesson, updateLesson } from "@/lib/actions/lesson.action";
+import { createLesson } from "@/lib/actions/lesson.action";
 import { cn } from "@/lib/utils";
 import { TCourseUpdateParams } from "@/types";
 import { MouseEvent, useState } from "react";
 import { toast } from "react-toastify";
-import slugify from "slugify";
 import Swal from "sweetalert2";
 import { IconCancel, IconCheck, IconDelete, IconEdit } from "../icons";
-import { LessonItemUpdate } from "../lesson/LessonItemUpdate";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
@@ -109,31 +107,6 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
       console.error(error);
     }
   };
-  const hanlderUpdateLesson = async (
-    e: MouseEvent<HTMLSpanElement>,
-    lessonId: string
-  ) => {
-    e.stopPropagation();
-    try {
-      const res = await updateLesson({
-        lessonId,
-        updateData: {
-          title: lessonEdit,
-          slug: slugify(lessonEdit, {
-            lower: true,
-            locale: "vi",
-            remove: /[*+~.()'"!:@]/g,
-          }),
-        },
-        path: `manage/course/update-content?slug=${course.slug}`,
-      });
-      if (res?.success) {
-        toast.success("Cập nhật bài học thành công!");
-        setLessonIdEdit("");
-        setLessonEdit("");
-      }
-    } catch (error) {}
-  };
   const [lectureIdEdit, setLectureIdEdit] = useState("");
   const [lectureEdit, setLectureEdit] = useState("");
   const [lessonIdEdit, setLessonIdEdit] = useState("");
@@ -221,11 +194,7 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                 </AccordionTrigger>
                 <AccordionContent className="border-none bg-transparent">
                   {lecture.lessons.map((lesson: ILesson) => (
-                    <Accordion
-                      type="single"
-                      collapsible={!lessonIdEdit}
-                      key={lesson._id}
-                    >
+                    <Accordion type="single" collapsible key={lesson._id}>
                       <AccordionItem value={lesson._id}>
                         <AccordionTrigger>
                           <div className="flex gap-3 items-center w-full justify-between pr-5">
@@ -246,9 +215,9 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                                           commonClassName.action,
                                           "text-green-500"
                                         )}
-                                        onClick={(e) => {
-                                          hanlderUpdateLesson(e, lesson._id);
-                                        }}
+                                        // onClick={(e) => {
+                                        //   hanlderUpdateLesson(e, lecture._id);
+                                        // }}
                                       >
                                         <IconCheck />
                                       </span>
@@ -278,7 +247,7 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                                       )}
                                       onClick={(e) => {
                                         e.stopPropagation();
-                                        setLessonIdEdit(lesson._id);
+                                        setLectureIdEdit(lecture._id);
                                       }}
                                     >
                                       <IconEdit />
@@ -288,9 +257,9 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                                         commonClassName.action,
                                         "text-red-500"
                                       )}
-                                      // onClick={(e) =>
-                                      //   hanlderDeleteLesson(e, lecture._id)
-                                      // }
+                                      onClick={(e) =>
+                                        hanlderDeleteLecture(e, lecture._id)
+                                      }
                                     >
                                       <IconDelete />
                                     </span>
@@ -300,9 +269,7 @@ const CoureUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                             </div>
                           </div>
                         </AccordionTrigger>
-                        <AccordionContent>
-                          <LessonItemUpdate lesson={lesson} />
-                        </AccordionContent>
+                        <AccordionContent>123456</AccordionContent>
                       </AccordionItem>
                     </Accordion>
                   ))}
