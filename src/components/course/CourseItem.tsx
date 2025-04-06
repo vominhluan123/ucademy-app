@@ -16,7 +16,7 @@ const CourseItem = ({ data }: { data: ICourse }) => {
         <Image
           alt={data.title}
           src={data.image || "/images/placeholder.jpg"}
-          className="w-full h-full object-cover rounded-lg"
+          className="w-full h-full  rounded-lg"
           fill
           sizes="(min-width: 768px) 300px, 100vw"
         />

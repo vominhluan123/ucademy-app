@@ -7,8 +7,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { ILecture } from "@/database/lecture.model";
 import { getCourseBySlug } from "@/lib/actions/course.action";
+import { TUpdateCourseLecture } from "@/types";
 import { ECourseStatus } from "@/types/enum";
 import Image from "next/image";
 
@@ -41,13 +41,7 @@ const page = async ({
             </>
           ) : (
             <div className="relative w-full h-full">
-              <Image
-                src={data.image}
-                alt=""
-                layout="fill" // Sử dụng layout fill thay vì fill
-                objectFit="cover" // Đảm bảo ảnh không bị méo
-                className="rounded-lg"
-              />
+              <Image src={data.image} alt="" className="rounded-lg" fill />
             </div>
           )}
         </div>
@@ -62,20 +56,35 @@ const page = async ({
           Nội dung khoá học
         </h2>
         <div className="leading-normal mb-10 dark:text-dark-text">
-          {lectures.map((lecture: ILecture) => (
+          {lectures.map((lecture: TUpdateCourseLecture) => (
             <Accordion
               type="single"
               collapsible
               className="w-full"
               key={lecture._id}
             >
-              <AccordionItem value={lecture._id}>
+              <AccordionItem value={lecture._id.toString()}>
                 <AccordionTrigger>
                   <div className="flex gap-3 items-center w-full justify-between pr-5">
                     <div>{lecture.title || "Chương Mới"} </div>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent></AccordionContent>
+                <AccordionContent className="!bg-transparent border-none">
+                  <div className="flex flex-col gap-3">
+                    {lecture.lessons.map((item: any) => (
+                      <div
+                        key={item._id}
+                        className="flex items-center gap-3 p-3 rounded-lg bg-gray-200 dark:bg-dark-card dark:border-dark-card border border-gray-200"
+                      >
+                        <IconPlay className="size-4"></IconPlay>
+                        <h4>{item.title}</h4>
+                        <span className="ml-auto text-xs font-semibold">
+                          {item.duration}p
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </AccordionContent>
               </AccordionItem>
             </Accordion>
           ))}
