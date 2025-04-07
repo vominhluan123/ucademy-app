@@ -1,5 +1,6 @@
 import PageNotFound from "@/app/not-found";
 import { IconCheck, IconPlay, IconStudy, IconUser } from "@/components/icons";
+import LessonItem from "@/components/lesson/LessonItem";
 import {
   Accordion,
   AccordionContent,
@@ -41,7 +42,13 @@ const page = async ({
             </>
           ) : (
             <div className="relative w-full h-full">
-              <Image src={data.image} alt="" className="rounded-lg" fill />
+              <Image
+                src={data.image}
+                alt=""
+                className="rounded-lg"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
             </div>
           )}
         </div>
@@ -65,23 +72,14 @@ const page = async ({
             >
               <AccordionItem value={lecture._id.toString()}>
                 <AccordionTrigger>
-                  <div className="flex gap-3 items-center w-full justify-between pr-5">
+                  <div className="flex gap-3 items-center w-full justify-between">
                     <div>{lecture.title || "Chương Mới"} </div>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="!bg-transparent border-none">
+                <AccordionContent className="!bg-transparent border-none p-0">
                   <div className="flex flex-col gap-3">
                     {lecture.lessons.map((item: any) => (
-                      <div
-                        key={item._id}
-                        className="flex items-center gap-3 p-3 rounded-lg bg-gray-200 dark:bg-dark-card dark:border-dark-card border border-gray-200"
-                      >
-                        <IconPlay className="size-4"></IconPlay>
-                        <h4>{item.title}</h4>
-                        <span className="ml-auto text-xs font-semibold">
-                          {item.duration}p
-                        </span>
-                      </div>
+                      <LessonItem lesson={item} key={item.id} />
                     ))}
                   </div>
                 </AccordionContent>
