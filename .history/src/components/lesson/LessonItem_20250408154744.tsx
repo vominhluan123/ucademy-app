@@ -17,7 +17,7 @@ const LessonItem = ({
   return (
     <div
       className={cn(
-        "flex items-center gap-2 p-4 text-sm rounded-lg bg-white dark:bg-dark-hover dark:border-dark-card border border-gray-200",
+        "flex items-center gap-2 p-4 text-sm rounded-lg bg-gray-200 dark:bg-dark-card dark:border-dark-card border border-gray-200 whitespace-normal",
         isActive ? "text-primary pointer-events-none font-semibold" : ""
       )}
     >
@@ -27,7 +27,7 @@ const LessonItem = ({
           {lesson.title}
         </Link>
       ) : (
-        <h4 className="line-clamp-1">{lesson.title}</h4>
+        <h4>{lesson.title}</h4>
       )}
 
       <span className="ml-auto text-xs font-semibold">{lesson.duration}p</span>

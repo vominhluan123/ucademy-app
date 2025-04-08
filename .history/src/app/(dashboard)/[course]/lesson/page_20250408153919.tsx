@@ -80,53 +80,46 @@ const page = async ({
             </div>
             <div></div>
           </div>
-        </div>
-        <Heading className="mt-5 mb-5">{lessonDetails.title}</Heading>
-        <div className="p-5 rounded-lg dark:bg-dark-card bg-white">
-          <div
-            dangerouslySetInnerHTML={{
-              __html:
-                typeof lessonDetails.content === "string"
-                  ? lessonDetails.content
-                  : "",
-            }}
-          ></div>
+          <Heading className="mt-5">{lessonDetails.title}</Heading>
+          <div className="p-5 rounded-lg dark:bg-dark-card">
+            <div
+              dangerouslySetInnerHTML={{
+                __html: lessonDetails.content,
+              }}
+            ></div>
+          </div>
         </div>
       </div>
       <div>
-        <div className="md:sticky md:top-5 h-fit">
-          <div className="leading-normal mb-10 dark:text-dark-text overflow-auto max-h-[calc(100vh-80px)] shadow-md rounded-lg p-4 bg-white dark:bg-dark-card">
-            {lectures.map((lecture: TUpdateCourseLecture) => (
-              <Accordion
-                type="single"
-                collapsible
-                className="w-full"
-                key={lecture._id}
-              >
-                <AccordionItem value={lecture._id.toString()}>
-                  <AccordionTrigger>
-                    <div className="flex gap-3 items-center w-full justify-between">
-                      <div className="line-clamp-1">
-                        {lecture.title || "Chương Mới"}{" "}
-                      </div>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="!bg-transparent border-none p-0 transition-all duration-300 ease-in-out">
-                    <div className="flex flex-col gap-3">
-                      {lecture.lessons.map((lesson: any) => (
-                        <LessonItem
-                          lesson={lesson}
-                          key={lesson.id}
-                          url={`/${course}/lesson?slug=${lesson.slug}`}
-                          isActive={lesson.slug === slug}
-                        />
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            ))}
-          </div>
+        <div className="leading-normal mb-10 dark:text-dark-text">
+          {lectures.map((lecture: TUpdateCourseLecture) => (
+            <Accordion
+              type="single"
+              collapsible
+              className="w-full"
+              key={lecture._id}
+            >
+              <AccordionItem value={lecture._id.toString()}>
+                <AccordionTrigger>
+                  <div className="flex gap-3 items-center w-full justify-between">
+                    <div>{lecture.title || "Chương Mới"} </div>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="!bg-transparent border-none p-0">
+                  <div className="flex flex-col gap-3">
+                    {lecture.lessons.map((lesson: any) => (
+                      <LessonItem
+                        lesson={lesson}
+                        key={lesson.id}
+                        url={`/${course}/lesson?slug=${lesson.slug}`}
+                        isActive={lesson.slug === slug}
+                      />
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          ))}
         </div>
       </div>
     </div>

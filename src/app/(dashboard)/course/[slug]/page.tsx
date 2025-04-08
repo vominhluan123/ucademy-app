@@ -59,10 +59,10 @@ const page = async ({
         <div className="leading-normal mb-10 dark:text-dark-text">
           {data.desc}
         </div>{" "}
-        <h2 className="font-bold text-xl mb-2 dark:text-dark-text">
+        <h2 className="font-bold text-xl mb-5 dark:text-dark-text">
           Nội dung khoá học
         </h2>
-        <div className="leading-normal mb-10 dark:text-dark-text">
+        <div className="leading-normal mb-10 dark:text-dark-text overflow-auto max-h-[calc(100vh-80px)] shadow-md rounded-lg p-4 bg-white dark:bg-dark-card">
           {lectures.map((lecture: TUpdateCourseLecture) => (
             <Accordion
               type="single"
@@ -73,7 +73,9 @@ const page = async ({
               <AccordionItem value={lecture._id.toString()}>
                 <AccordionTrigger>
                   <div className="flex gap-3 items-center w-full justify-between">
-                    <div>{lecture.title || "Chương Mới"} </div>
+                    <div className="line-clamp-1">
+                      {lecture.title || "Chương Mới"}{" "}
+                    </div>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="!bg-transparent border-none p-0">

@@ -47,7 +47,7 @@ const AccordionContent = React.forwardRef<
   >
     <div
       className={cn(
-        "p-4 dark:border-dark-border dark:bg-dark-card bg-white mb-4",
+        "p-4 dark:border-dark-border dark:bg-dark-card  mb-4",
         className
       )}
     >

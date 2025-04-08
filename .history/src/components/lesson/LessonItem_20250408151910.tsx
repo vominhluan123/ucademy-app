@@ -17,18 +17,12 @@ const LessonItem = ({
   return (
     <div
       className={cn(
-        "flex items-center gap-2 p-4 text-sm rounded-lg bg-white dark:bg-dark-hover dark:border-dark-card border border-gray-200",
-        isActive ? "text-primary pointer-events-none font-semibold" : ""
+        "flex items-center gap-2 p-4 text-sm rounded-lg bg-gray-200 dark:bg-dark-card dark:border-dark-card border border-gray-200",
+        isActive ? "text-primary pointer-events-none" : ""
       )}
     >
       <IconPlay className="size-5"></IconPlay>
-      {url ? (
-        <Link className="line-clamp-1" href={url}>
-          {lesson.title}
-        </Link>
-      ) : (
-        <h4 className="line-clamp-1">{lesson.title}</h4>
-      )}
+      {url ? <Link href={url}>{lesson.title}</Link> : <h4>{lesson.title}</h4>}
 
       <span className="ml-auto text-xs font-semibold">{lesson.duration}p</span>
     </div>

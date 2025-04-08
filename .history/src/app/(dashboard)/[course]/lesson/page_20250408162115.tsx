@@ -95,7 +95,7 @@ const page = async ({
       </div>
       <div>
         <div className="md:sticky md:top-5 h-fit">
-          <div className="leading-normal mb-10 dark:text-dark-text overflow-auto max-h-[calc(100vh-80px)] shadow-md rounded-lg p-4 bg-white dark:bg-dark-card">
+          <div className="leading-normal mb-10 dark:text-dark-text">
             {lectures.map((lecture: TUpdateCourseLecture) => (
               <Accordion
                 type="single"
@@ -111,7 +111,7 @@ const page = async ({
                       </div>
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent className="!bg-transparent border-none p-0 transition-all duration-300 ease-in-out">
+                  <AccordionContent className="!bg-transparent border-none p-0">
                     <div className="flex flex-col gap-3">
                       {lecture.lessons.map((lesson: any) => (
                         <LessonItem

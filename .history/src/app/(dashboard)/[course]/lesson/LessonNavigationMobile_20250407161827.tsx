@@ -17,7 +17,7 @@ const LessonNavigationMobile = ({
   return (
     <>
       <Button
-        className="size-10 p-3 transition-opacity duration-300 ease-in-out"
+        className="size-10 p-3"
         onClick={() =>
           router.push(`/${course}/lesson?slug=${prevLesson?.slug}`)
         }
@@ -27,7 +27,7 @@ const LessonNavigationMobile = ({
       </Button>
 
       <Button
-        className="size-10 p-3 transition-opacity duration-300 ease-in-out"
+        className="size-10 p-3"
         onClick={() =>
           router.push(`/${course}/lesson?slug=${nextLesson?.slug}`)
         }

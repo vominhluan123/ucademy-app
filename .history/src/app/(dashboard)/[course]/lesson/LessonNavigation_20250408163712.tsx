@@ -16,7 +16,7 @@ const LessonNavigation = ({
   return (
     <>
       <button
-        className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full opacity-0 group-hover:opacity-100  p-2 max-md:hidden transition-opacity duration-300 ease-in-out"
+        className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full opacity-0 group-hover:opacity-100 transition p-2 max-md:hidden transition-opacity duration-300 ease-in-out"
         onClick={() =>
           router.push(`/${course}/lesson?slug=${prevLesson?.slug}`)
         }
@@ -26,7 +26,7 @@ const LessonNavigation = ({
       </button>
 
       <button
-        className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100  max-md:hidden transition-opacity duration-300 ease-in-out"
+        className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition max-md:hidden transition-opacity duration-300 ease-in-out"
         onClick={() =>
           router.push(`/${course}/lesson?slug=${nextLesson?.slug}`)
         }

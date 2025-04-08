@@ -111,7 +111,7 @@ const page = async ({
                       </div>
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent className="!bg-transparent border-none p-0 transition-all duration-300 ease-in-out">
+                  <AccordionContent className="!bg-transparent border-none p-0">
                     <div className="flex flex-col gap-3">
                       {lecture.lessons.map((lesson: any) => (
                         <LessonItem
