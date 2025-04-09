@@ -69,6 +69,12 @@ export type TCreateLessonParams = {
   path?: string;
   slug?: string;
 };
+export type TCreateHistoryParams = {
+  course: string;
+  lesson: string;
+  checked: boolean | string;
+  path: string;
+};
 
 export {
   TActiveLinkProps,
