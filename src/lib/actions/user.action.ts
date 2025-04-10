@@ -1,6 +1,8 @@
 "use sever";
+import { ICourse } from "@/database/course.model";
 import User, { IUser } from "@/database/user.model";
 import { TCreateUserParams } from "@/types";
+import { auth } from "@clerk/nextjs/server";
 import { connectToDatabase } from "../mongoose";
 
 export async function createUser(params: TCreateUserParams) {
@@ -19,7 +21,7 @@ export async function getUserInfo({
   userId: string;
 }): Promise<IUser | null | undefined> {
   try {
-    await connectToDatabase();
+    connectToDatabase();
     const findUser = await User.findOne({
       clerkId: userId,
     });
@@ -27,6 +29,18 @@ export async function getUserInfo({
     return findUser || null;
   } catch (error) {
     console.log("Error fetching user info:", error);
-    return null; // Tránh lỗi không có return
+  }
+}
+export async function getUserCourses(): Promise<ICourse[] | undefined | null> {
+  try {
+    connectToDatabase();
+    const { userId } = await auth();
+    const findUser = await User.findOne({ clerkId: userId }).populate(
+      "courses"
+    );
+    if (!findUser) return null;
+    return findUser.courses;
+  } catch (error) {
+    console.log("Error fetching user info:", error);
   }
 }

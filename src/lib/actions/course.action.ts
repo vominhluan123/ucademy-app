@@ -16,7 +16,6 @@ export async function getAllCourses(): Promise<ICourse[] | undefined> {
     const Courses = await Course.find();
     return Courses;
   } catch (error) {
-    console.log("🚀 ~ getAllCourses ~ error:", error);
     return [];
   }
 }

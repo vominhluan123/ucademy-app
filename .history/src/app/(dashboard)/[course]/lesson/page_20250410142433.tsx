@@ -13,7 +13,6 @@ import { findAllLessons, getLessonDetails } from "@/lib/actions/lesson.action";
 import { getUserInfo } from "@/lib/actions/user.action";
 import { TUpdateCourseLecture } from "@/types";
 import { auth } from "@clerk/nextjs/server";
-import LessonLeft from "./LessonLeft";
 
 const page = async ({
   params,
@@ -55,18 +54,8 @@ const page = async ({
   });
   const completePercentege =
     ((histories?.length || 0) / (lessonList?.length || 1)) * 100;
-  const url = `/${course}/lesson?slug=${slug}`;
   return (
     <div className="flex flex-col md:grid md:grid-cols-[2fr,1fr] gap-5 lg:gap-10 min-h-screen">
-      <LessonLeft
-        title={lessonDetails.title}
-        content={lessonDetails.content}
-        course={params.course}
-        videoId={videoId}
-        nextLessonIndex={nextLessonIndex}
-        prevLessonIndex={prevLessonIndex}
-        url={url}
-      />
       <div>
         <div className="md:sticky md:top-5 h-fit">
           <div className="w-full h-3 rounded-full border bg-white mb-2 border-white dark:border-dark-border dark:bg-dark-card">

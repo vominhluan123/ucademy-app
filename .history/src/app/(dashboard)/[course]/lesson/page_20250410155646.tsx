@@ -65,7 +65,6 @@ const page = async ({
         videoId={videoId}
         nextLessonIndex={nextLessonIndex}
         prevLessonIndex={prevLessonIndex}
-        url={url}
       />
       <div>
         <div className="md:sticky md:top-5 h-fit">

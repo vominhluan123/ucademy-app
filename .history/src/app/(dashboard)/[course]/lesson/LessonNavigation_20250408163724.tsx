@@ -1,6 +1,5 @@
 "use client";
 
-import { ILesson } from "@/database/lesson.modal";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -9,8 +8,8 @@ const LessonNavigation = ({
   prevLesson,
   course,
 }: {
-  nextLesson?: ILesson | null | undefined;
-  prevLesson?: ILesson | null | undefined;
+  nextLesson: any;
+  prevLesson: any;
   course: string;
 }) => {
   const router = useRouter();

@@ -9,8 +9,8 @@ const LessonNavigationMobile = ({
   prevLesson,
   course,
 }: {
-  nextLesson?: ILesson | null | undefined;
-  prevLesson?: ILesson | null | undefined;
+  nextLesson?: ILesson | null;
+  prevLesson?: ILesson | null;
   course: string;
 }) => {
   const router = useRouter();

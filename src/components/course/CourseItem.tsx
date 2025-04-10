@@ -5,12 +5,21 @@ import IconClock from "../icons/IconClock";
 import IconEye from "../icons/IconEye";
 import IconStart from "../icons/IconStart";
 
-const CourseItem = ({ data }: { data: ICourse }) => {
+const CourseItem = ({
+  data,
+  cta,
+  url,
+}: {
+  data: ICourse;
+  cta?: string;
+  url?: string;
+}) => {
+  const courseUrl = url ? url : `/course/${data?.slug}`;
   return (
     <div className="course-items max-w-sm w-full bg-gray-100 dark:bg-dark-card dark:border-dark-card border border-gray-200 p-4 rounded-2xl transition">
       {/* Ảnh khóa học */}
       <Link
-        href={`/course/${data?.slug}`}
+        href={courseUrl}
         className="block h-[200px] sm:h-[250px] md:h-[300px] relative"
       >
         <Image
@@ -66,10 +75,10 @@ const CourseItem = ({ data }: { data: ICourse }) => {
 
         {/* Nút xem chi tiết */}
         <Link
-          href={`/course/${data?.slug}`}
+          href={courseUrl}
           className="flex items-center justify-center h-12 text-white dark:text-dark-text rounded-lg font-semibold bg-primary hover:bg-secondary hover:shadow-lg hover:scale-105 w-full mt-6 transition-all duration-300 ease-in-out"
         >
-          Xem chi tiết
+          {cta || "Xem chi tiết"}
         </Link>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import PageNotFound from "@/app/not-found";
+import Heading from "@/components/common/Heading";
 import LessonItem from "@/components/lesson/LessonItem";
 import {
   Accordion,
@@ -13,7 +14,8 @@ import { findAllLessons, getLessonDetails } from "@/lib/actions/lesson.action";
 import { getUserInfo } from "@/lib/actions/user.action";
 import { TUpdateCourseLecture } from "@/types";
 import { auth } from "@clerk/nextjs/server";
-import LessonLeft from "./LessonLeft";
+import LessonNavigation from "./LessonNavigation";
+import LessonNavigationMobile from "./LessonNavigationMobile";
 
 const page = async ({
   params,
@@ -55,18 +57,54 @@ const page = async ({
   });
   const completePercentege =
     ((histories?.length || 0) / (lessonList?.length || 1)) * 100;
-  const url = `/${course}/lesson?slug=${slug}`;
   return (
     <div className="flex flex-col md:grid md:grid-cols-[2fr,1fr] gap-5 lg:gap-10 min-h-screen">
-      <LessonLeft
-        title={lessonDetails.title}
-        content={lessonDetails.content}
-        course={params.course}
-        videoId={videoId}
-        nextLessonIndex={nextLessonIndex}
-        prevLessonIndex={prevLessonIndex}
-        url={url}
-      />
+      <div>
+        <div className="relative aspect-video group">
+          {videoId ? (
+            <>
+              <iframe
+                className="w-full h-full rounded-lg object-fill"
+                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`}
+                allow="autoplay"
+                allowFullScreen
+              ></iframe>
+              <LessonNavigation
+                nextLesson={nextLessonIndex}
+                prevLesson={prevLessonIndex}
+                course={params.course}
+              ></LessonNavigation>
+            </>
+          ) : (
+            <div className="flex items-center justify-center w-full h-full bg-gray-100 rounded-lg mb-5">
+              <p className="text-gray-500">
+                Video đang được tải hoặc không khả dụng.
+              </p>
+            </div>
+          )}
+          <div className="md:hidden flex items-center justify-between mt-5 mb-5">
+            <div className="flex gap-3">
+              <LessonNavigationMobile
+                nextLesson={nextLessonIndex}
+                prevLesson={prevLessonIndex}
+                course={params.course}
+              />
+            </div>
+            <div></div>
+          </div>
+        </div>
+        <Heading className="mt-5 mb-5">{lessonDetails.title}</Heading>
+        <div className="p-5 rounded-lg dark:bg-dark-card bg-white">
+          <div
+            dangerouslySetInnerHTML={{
+              __html:
+                typeof lessonDetails.content === "string"
+                  ? lessonDetails.content
+                  : "",
+            }}
+          ></div>
+        </div>
+      </div>
       <div>
         <div className="md:sticky md:top-5 h-fit">
           <div className="w-full h-3 rounded-full border bg-white mb-2 border-white dark:border-dark-border dark:bg-dark-card">
