@@ -21,7 +21,6 @@ const page = async ({
   };
 }) => {
   const data = await getCourseBySlug({ slug: params.slug });
-  console.log("🚀 ~ data:", data);
   if (!data) {
     return null;
   }

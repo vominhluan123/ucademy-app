@@ -211,7 +211,7 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
                   <Textarea
                     placeholder="Nhập mô tả...."
                     {...field}
-                    className="h-[300px]"
+                    className="h-[350px]"
                   />
                 </FormControl>
                 <FormMessage />
@@ -226,7 +226,7 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
                 <FormLabel>Ảnh đại diện</FormLabel>
                 <FormControl>
                   <>
-                    <div className="relative border flex items-center justify-center rounded-lg dark:bg-dark-border border-gray-300 dark:border-gray-600 h-[300px]">
+                    <div className="relative border flex items-center justify-center rounded-lg dark:bg-dark-border border-gray-300 dark:border-gray-600 h-[350px]">
                       {!imageWatch ? (
                         <UploadButton
                           endpoint="imageUploader"
@@ -244,7 +244,8 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
                             alt="Uploaded Image"
                             fill
                             src={imageWatch}
-                            className="object-cover rounded-lg"
+                            className="rounded-lg"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           />
                           {/* Nút thay đổi ảnh */}
                           <button
@@ -275,7 +276,7 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
                     spellCheck={false} // Tắt kiểm tra chính tả
                     autoCorrect="off" // Tắt tự động sửa lỗi
                     autoCapitalize="none" // Tắt viết hoa tự động
-                    className="w-full px-4 py-2 border font-medium dark:bg-dark-border  border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary  transition"
+                    className="w-full px-4 py-2 border font-medium dark:bg-dark-border  border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none dark:focus:ring-primary-dark transition"
                   />
                 </FormControl>
                 <FormMessage />
@@ -294,7 +295,7 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
                     type="number"
                     {...field}
                     onChange={(e) => field.onChange(Number(e.target.value))}
-                    className="w-full px-4 py-2 border font-medium dark:bg-dark-border  border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary  transition"
+                    className="w-full px-4 py-2 border font-medium dark:bg-dark-border  border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 dark:focus:ring-primary-dark transition"
                   />
                 </FormControl>
                 <FormMessage />
@@ -383,7 +384,7 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
                         className="flex items-center gap-3 w-full"
                       >
                         <Input
-                          className="flex-1 px-4 py-2 font-medium border dark:bg-dark-border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary  transition"
+                          className="flex-1 px-4 py-2 font-medium border dark:bg-dark-border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 dark:focus:ring-primary-dark transition"
                           placeholder={`Yêu cầu số ${index + 1}`}
                           value={r}
                           onChange={(e) => {
@@ -438,7 +439,7 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
                         className="flex items-center gap-3 w-full"
                       >
                         <Input
-                          className="flex-1 px-4 py-2 font-medium border dark:bg-dark-border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary  transition"
+                          className="flex-1 px-4 py-2 font-medium border dark:bg-dark-border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none dark:focus:ring-primary-dark transition"
                           placeholder={`Lợi ích số ${index + 1}`}
                           value={r}
                           onChange={(e) => {
@@ -496,7 +497,7 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
                         key={index}
                       >
                         <Input
-                          className="flex-1 px-4 py-2 font-medium border dark:bg-dark-border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary transition"
+                          className="flex-1 px-4 py-2 font-medium border dark:bg-dark-border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none  dark:focus:ring-primary-dark transition"
                           placeholder={`Câu hỏi số ${index + 1}`}
                           value={r.question}
                           onChange={(e) => {
@@ -506,7 +507,7 @@ export const CourseUpdate = ({ data }: { data: ICourse }) => {
                           }}
                         />
                         <Input
-                          className="flex-1 px-4 py-2 font-medium border dark:bg-dark-border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary transition"
+                          className="flex-1 px-4 py-2 font-medium border dark:bg-dark-border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none dark:focus:ring-primary-dark focus:border-primary transition"
                           placeholder={`Câu trả lời số ${index + 1}`}
                           value={r.answer}
                           onChange={(e) => {

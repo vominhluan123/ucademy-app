@@ -91,4 +91,7 @@ export const commonClassName = {
     "!bg-opacity-10 border border-current rounded-md font-medium px-3 py-1 whitespace-nowrap",
   action:
     "size-8 rounded-md dark:bg-transparent dark:bg-dark dark:border-dark dark:hover:bg-dark-border border flex justify-center items-center bg-gray-100 text-gray-500 hover:bg-white",
+  btnPrimaty:
+    "flex items-center justify-center h-12 text-white dark:text-dark-text rounded-lg font-semibold bg-primary w-full mt-6 button-primary",
 };
+export const LastLessonKey = "lastLesson";
