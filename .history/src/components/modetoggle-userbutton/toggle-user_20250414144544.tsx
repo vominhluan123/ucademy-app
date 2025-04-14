@@ -1,6 +1,6 @@
 "use client";
 import { useAuth, UserButton } from "@clerk/nextjs";
-import Link from "next/link";
+import { Link } from "lucide-react";
 import { IconUser } from "../icons";
 import { ModeToggle } from "../mode-toogle";
 

@@ -1,7 +1,6 @@
 "use client";
 import { useAuth, UserButton } from "@clerk/nextjs";
-import Link from "next/link";
-import { IconUser } from "../icons";
+import { Link } from "lucide-react";
 import { ModeToggle } from "../mode-toogle";
 
 const ToggleUser = () => {
@@ -15,9 +14,7 @@ const ToggleUser = () => {
         <Link
           href="/sign-in"
           className="size-30 rounded-lg bg-primary text-white flex items-center justify-center p-1"
-        >
-          <IconUser></IconUser>
-        </Link>
+        ></Link>
       )}
     </div>
   );
