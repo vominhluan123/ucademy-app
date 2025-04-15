@@ -6,10 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { ILesson } from "@/database/lesson.modal";
 import { getCourseBySlug } from "@/lib/actions/course.action";
-import { getHistory } from "@/lib/actions/history.action";
-import { countLessonByCourseID } from "@/lib/actions/lesson.action";
 import { TUpdateCourseLecture } from "@/types";
 
 const page = async ({
@@ -27,15 +24,7 @@ const page = async ({
   const slug = searchParams.slug;
   const findCoures = await getCourseBySlug({ slug: course });
   if (!findCoures) return <PageNotFound />;
-  const lectures = findCoures?.lectures || [];
   const courseID = findCoures._id.toString();
-  const histories = await getHistory({
-    course: courseID,
-  });
-  const lessonCount = await countLessonByCourseID({ courseID });
-  const completePercentege = Math.round(
-    ((histories?.length || 0) / (lessonCount || 1)) * 100
-  );
   return (
     <div className="md:sticky md:top-5 h-fit">
       <div className="w-full h-3 rounded-full border bg-white mb-2 border-white dark:border-dark-border dark:bg-dark-card">

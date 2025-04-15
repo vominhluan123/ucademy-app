@@ -103,7 +103,7 @@ export async function countLessonByCourseID({
   try {
     connectToDatabase();
     const count = await Lesson.countDocuments({ course: courseID });
-    return count || 0;
+    return count;
   } catch (error) {
     console.error(error);
   }

@@ -47,7 +47,6 @@ const LessonLeft = ({
               allow="autoplay"
               allowFullScreen
             ></iframe>
-
             <LessonNavigation
               nextLesson={nextLessonIndex}
               prevLesson={prevLessonIndex}

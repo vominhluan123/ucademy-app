@@ -3,6 +3,7 @@ import Heading from "@/components/common/Heading";
 import { LastLessonKey } from "@/constants";
 import { ILesson } from "@/database/lesson.modal";
 import { useEffect } from "react";
+import VideoPlayer from "./@player/VideoPlayer";
 import LessonNavigation from "./LessonNavigation";
 import LessonNavigationMobile from "./LessonNavigationMobile";
 type LessonLeftProps = {
@@ -41,13 +42,16 @@ const LessonLeft = ({
       <div className="relative aspect-video group">
         {videoId ? (
           <>
-            <iframe
+            {/* <iframe
               className="w-full h-full rounded-lg object-fill"
               src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`}
               allow="autoplay"
               allowFullScreen
-            ></iframe>
-
+            ></iframe> */}
+            <VideoPlayer
+              videoId={videoId}
+              nextLessonSlug={nextLessonIndex?.slug || null}
+            />
             <LessonNavigation
               nextLesson={nextLessonIndex}
               prevLesson={prevLessonIndex}

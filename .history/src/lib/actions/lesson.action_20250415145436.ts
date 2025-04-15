@@ -96,14 +96,14 @@ export async function findAllLessons({
   }
 }
 export async function countLessonByCourseID({
-  courseID,
+  course,
 }: {
-  courseID: string;
+  course: string;
 }): Promise<number | undefined> {
   try {
     connectToDatabase();
-    const count = await Lesson.countDocuments({ course: courseID });
-    return count || 0;
+    const count = await Lesson.countDocuments({ course });
+    return count;
   } catch (error) {
     console.error(error);
   }
