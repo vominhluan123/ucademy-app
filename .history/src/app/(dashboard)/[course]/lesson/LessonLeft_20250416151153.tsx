@@ -69,9 +69,9 @@ const LessonLeft = ({
         <div className="md:hidden flex items-center justify-between mt-5 mb-5">
           <div className="flex gap-3">
             <LessonNavigationMobile
-              nextLesson={nextLessonIndex}
-              prevLesson={prevLessonIndex}
-              course={course}
+              nextLesson={JSON.parse(JSON.stringify(nextLessonIndex))}
+              prevLesson={JSON.parse(JSON.stringify(prevLessonIndex))}
+              course={JSON.parse(JSON.stringify(course))}
             />
           </div>
         </div>

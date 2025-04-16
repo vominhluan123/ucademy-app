@@ -53,11 +53,6 @@ const LessonLeft = ({
               prevLesson={prevLessonIndex}
               course={course}
             ></LessonNavigation>
-            <div className="flex items-center justify-center float-end mt-5">
-              <Button onClick={toggleExpanded}>
-                {isExpanded ? "Thu gọn" : "Mở rộng"}
-              </Button>
-            </div>
           </>
         ) : (
           <div className="flex items-center justify-center w-full h-full bg-gray-100 rounded-lg mb-5">
@@ -76,7 +71,9 @@ const LessonLeft = ({
           </div>
         </div>
       </div>
-
+      <div className="float-end">
+        <Button onClick={toggleExpanded}>asb</Button>
+      </div>
       <Heading className="mt-5 mb-5 border-t border-gray-200 dark:border-dark-border pt-4">
         {title}
       </Heading>

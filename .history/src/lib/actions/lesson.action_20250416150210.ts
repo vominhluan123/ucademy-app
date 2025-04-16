@@ -76,8 +76,8 @@ export async function getLessonDetails({
     const lessonDetails = await Lesson.findOne({
       slug,
       course,
-    });
-    return JSON.parse(JSON.stringify(lessonDetails));
+    }).lean();
+    if (!lessonDetails) return undefined;
   } catch (error) {
     console.error(error);
   }
@@ -89,8 +89,8 @@ export async function findAllLessons({
 }): Promise<ILesson[] | undefined> {
   try {
     connectToDatabase();
-    const lessons = await Lesson.find({ course }).lean();
-    return JSON.parse(JSON.stringify(lessons));
+    const lessons = await Lesson.find({ course });
+    return lessons;
   } catch (error) {
     console.error(error);
   }

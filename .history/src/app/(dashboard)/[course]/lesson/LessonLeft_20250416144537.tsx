@@ -53,7 +53,7 @@ const LessonLeft = ({
               prevLesson={prevLessonIndex}
               course={course}
             ></LessonNavigation>
-            <div className="flex items-center justify-center float-end mt-5">
+            <div className="flex items-center float-end">
               <Button onClick={toggleExpanded}>
                 {isExpanded ? "Thu gọn" : "Mở rộng"}
               </Button>

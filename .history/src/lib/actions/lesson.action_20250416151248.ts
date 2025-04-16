@@ -89,7 +89,7 @@ export async function findAllLessons({
 }): Promise<ILesson[] | undefined> {
   try {
     connectToDatabase();
-    const lessons = await Lesson.find({ course }).lean();
+    const lessons = await Lesson.find({ course });
     return JSON.parse(JSON.stringify(lessons));
   } catch (error) {
     console.error(error);

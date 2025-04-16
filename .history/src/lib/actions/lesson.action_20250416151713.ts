@@ -90,7 +90,7 @@ export async function findAllLessons({
   try {
     connectToDatabase();
     const lessons = await Lesson.find({ course }).lean();
-    return JSON.parse(JSON.stringify(lessons));
+    if (!lessons) return undefined;
   } catch (error) {
     console.error(error);
   }

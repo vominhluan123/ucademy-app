@@ -1,14 +1,11 @@
 "use client";
 import Heading from "@/components/common/Heading";
-import { Button } from "@/components/ui/button";
 import { LastLessonKey } from "@/constants";
 import { ILesson } from "@/database/lesson.modal";
-import useLessonLayoutStore from "@/store";
 import { useEffect } from "react";
 import VideoPlayer from "./@player/VideoPlayer";
 import LessonNavigation from "./LessonNavigation";
 import LessonNavigationMobile from "./LessonNavigationMobile";
-
 type LessonLeftProps = {
   videoId: string;
   course: string;
@@ -28,8 +25,6 @@ const LessonLeft = ({
   prevLessonIndex,
   url,
 }: LessonLeftProps) => {
-  const { isExpanded, toggleExpanded } = useLessonLayoutStore();
-
   useEffect(() => {
     const data = localStorage.getItem(LastLessonKey);
     const parsed = data ? JSON.parse(data) : {};
@@ -44,20 +39,16 @@ const LessonLeft = ({
 
   return (
     <div>
-      <div className="relative aspect-video group mb-5">
+      <div className="relative aspect-video group">
         {videoId ? (
           <>
-            <VideoPlayer videoId={videoId} />
+            <VideoPlayer videoID={videoId} />
+
             <LessonNavigation
               nextLesson={nextLessonIndex}
               prevLesson={prevLessonIndex}
               course={course}
             ></LessonNavigation>
-            <div className="flex items-center justify-center float-end mt-5">
-              <Button onClick={toggleExpanded}>
-                {isExpanded ? "Thu gọn" : "Mở rộng"}
-              </Button>
-            </div>
           </>
         ) : (
           <div className="flex items-center justify-center w-full h-full bg-gray-100 rounded-lg mb-5">
@@ -74,9 +65,9 @@ const LessonLeft = ({
               course={course}
             />
           </div>
+          <div></div>
         </div>
       </div>
-
       <Heading className="mt-5 mb-5 border-t border-gray-200 dark:border-dark-border pt-4">
         {title}
       </Heading>

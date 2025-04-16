@@ -77,7 +77,7 @@ export async function getLessonDetails({
       slug,
       course,
     });
-    return JSON.parse(JSON.stringify(lessonDetails));
+    return lessonDetails;
   } catch (error) {
     console.error(error);
   }
@@ -89,8 +89,8 @@ export async function findAllLessons({
 }): Promise<ILesson[] | undefined> {
   try {
     connectToDatabase();
-    const lessons = await Lesson.find({ course }).lean();
-    return JSON.parse(JSON.stringify(lessons));
+    const lessons = await Lesson.find({ course });
+    return lessons;
   } catch (error) {
     console.error(error);
   }
