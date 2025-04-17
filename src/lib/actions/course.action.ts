@@ -5,15 +5,53 @@ import Lesson from "@/database/lesson.modal";
 import {
   TCourseUpdateParams,
   TcreateCourseParams,
+  TGetAllCourseParams,
   TUpdateCourseParams,
 } from "@/types";
+import { ECourseStatus } from "@/types/enum";
+import { FilterQuery } from "mongoose";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
 
-export async function getAllCourses(): Promise<ICourse[] | undefined> {
+export async function getAllCourses(
+  params: TGetAllCourseParams
+): Promise<ICourse[] | undefined> {
   try {
     connectToDatabase();
-    const Courses = await Course.find();
+    const { page = 1, limit = 10, search, status } = params;
+    const skip = (page - 1) * limit;
+    const query: FilterQuery<typeof Course> = {};
+    if (search) {
+      query.$or = [{ title: { $regex: search, $options: "i" } }];
+    }
+    if (status) {
+      query.status = status;
+    }
+    const Courses = await Course.find(query)
+      .skip(skip)
+      .limit(limit)
+      .sort({ created_at: -1 });
+    return Courses;
+  } catch (error) {
+    return [];
+  }
+}
+export async function getAllCoursesPublic(
+  params: TGetAllCourseParams
+): Promise<ICourse[] | undefined> {
+  try {
+    connectToDatabase();
+    const { page = 1, limit = 10, search } = params;
+    const skip = (page - 1) * limit;
+    const query: FilterQuery<typeof Course> = {};
+    if (search) {
+      query.$or = [{ title: { $regex: search, $options: "i" } }];
+    }
+    query.status = ECourseStatus.APPROVED;
+    const Courses = await Course.find(query)
+      .skip(skip)
+      .limit(limit)
+      .sort({ created_at: -1 });
     return Courses;
   } catch (error) {
     return [];

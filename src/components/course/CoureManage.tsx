@@ -13,8 +13,12 @@ import { ICourse } from "@/database/course.model";
 import { updateCourse } from "@/lib/actions/course.action";
 import { cn } from "@/lib/utils";
 import { ECourseStatus } from "@/types/enum";
+import { debounce } from "lodash";
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useState, useTransition } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { IconDelete, IconEdit, IconStudy } from "../icons";
@@ -29,6 +33,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { Skeleton } from "../ui/skeleton";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 const IconArrowLeft = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -58,6 +69,19 @@ const IconArrowRight = (
   </svg>
 );
 const CoureManage = ({ course }: { course: ICourse[] }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
   const handleDeleteCourse = (slug: string) => {
     Swal.fire({
       title: "Are you sure?",
@@ -86,13 +110,13 @@ const CoureManage = ({ course }: { course: ICourse[] }) => {
   const handleChangeStatus = async (slug: string, status: ECourseStatus) => {
     try {
       Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        title: "Bạn có muốn đổi trạng thái không",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, update it!",
+        confirmButtonText: "cập nhật",
+        cancelButtonText: "Huỷ",
       }).then(async (result) => {
         if (result.isConfirmed) {
           await updateCourse({
@@ -107,11 +131,36 @@ const CoureManage = ({ course }: { course: ICourse[] }) => {
             path: "/manage/course",
           });
           toast.success("Cập nhật trạng thái thành công");
+          updateQueryParams("status", ""), updateQueryParams("search", "");
         }
       });
     } catch (error) {
       console.log("🚀 ~ handleChangeStatus ~ error:", error);
     }
+  };
+  const updateQueryParams = (key: string, value: string) => {
+    router.push(`${pathname}?${createQueryString(key, value)}`);
+  };
+  const handlerSearchCourse = debounce(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      startTransition(() => {
+        updateQueryParams("search", e.target.value);
+      });
+    },
+    500
+  );
+  const handlerSelectStatus = (status: ECourseStatus) => {
+    startTransition(() => {
+      updateQueryParams("status", status);
+    });
+  };
+  const [page, setPage] = useState(1);
+  const handleChangPage = (type: "prev" | "next", page: number) => {
+    const newPage = type === "prev" ? Math.max(1, page - 1) : page + 1;
+    setPage(newPage);
+    startTransition(() => {
+      updateQueryParams("page", newPage.toString());
+    });
   };
   return (
     <>
@@ -139,11 +188,23 @@ const CoureManage = ({ course }: { course: ICourse[] }) => {
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-between mb-6">
           <Heading className="mb-2 sm:mb-0">Quản lý khoá học</Heading>
           <div className="flex gap-3">
-            <Input
-              className="px-4 py-2 border font-medium dark:bg-dark-border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary transition w-full sm:w-auto"
-              placeholder="Tìm kiếm khoá học..."
-            />
-            <Select>
+            <div className="relative w-full sm:w-[300px]">
+              <Input
+                className="px-4 py-2 border font-medium dark:bg-dark-border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary transition w-full"
+                placeholder="Tìm kiếm khoá học..."
+                onChange={(e) => handlerSearchCourse(e)}
+              />
+              {isPending && (
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 animate-spin text-primary">
+                  <Loader2 size={18} />
+                </div>
+              )}
+            </div>
+            <Select
+              onValueChange={(value) =>
+                handlerSelectStatus(value as ECourseStatus)
+              }
+            >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Chọn trạng thái" />
               </SelectTrigger>
@@ -160,7 +221,7 @@ const CoureManage = ({ course }: { course: ICourse[] }) => {
           </div>
         </div>
         {/* Bảng cuộn ngang trên mobile */}
-        <div className="overflow-x-auto">
+        <div className="w-full overflow-x-auto">
           <Table className="w-full min-w-[600px]">
             <TableHeader>
               <TableRow>
@@ -171,101 +232,170 @@ const CoureManage = ({ course }: { course: ICourse[] }) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {course.length > 0 &&
-                course.map((course) => (
-                  <TableRow key={course.slug}>
-                    <TableCell>
-                      <div className="flex items-center gap-3">
-                        <Image
-                          alt=""
-                          src={course.image}
-                          width={64}
-                          height={64}
-                          className="size-12 sm:size-16 rounded-lg object-cover"
-                        />
-                        <div className="flex flex-col gap-1">
-                          <h3 className="font-bold text-sm sm:text-base">
-                            {course.title}
-                          </h3>
-                          <h4 className="text-xs sm:text-sm text-slate-500">
-                            {new Date(course.created_at).toLocaleDateString(
-                              "vi-VI"
-                            )}
-                          </h4>
+              {isPending
+                ? Array.from({ length: 2 }).map((_, i) => (
+                    <TableRow key={i}>
+                      <TableCell>
+                        <div className="flex items-center gap-3">
+                          <Skeleton className="h-12 w-12 sm:h-16 sm:w-16 rounded-lg" />
+                          <div className="flex flex-col gap-2">
+                            <Skeleton className="h-4 w-32 rounded" />
+                            <Skeleton className="h-3 w-20 rounded" />
+                          </div>
                         </div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <span
-                        className="font-bold text-sm sm:text-base text-primary"
-                        suppressHydrationWarning
-                      >
-                        {course.price.toLocaleString()}đ
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      <button
-                        onClick={() =>
-                          handleChangeStatus(course.slug, course.status)
-                        }
-                        type="button"
-                        className={cn(
-                          commonClassName.status,
-                          courseStatus.find(
-                            (item) => item.value === course.status
-                          )?.className
-                        )}
-                      >
-                        {
-                          courseStatus.find(
-                            (item) => item.value === course.status
-                          )?.title
-                        }
-                      </button>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex flex-wrap gap-2 sm:gap-3">
-                        <Link
-                          href={`/manage/course/update-content?slug=${course.slug}`}
-                          className={commonClassName.action}
-                          target="_blank"
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton className="h-4 w-16 rounded" />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton className="h-6 w-24 rounded-full" />
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex gap-2">
+                          {Array.from({ length: 4 }).map((_, j) => (
+                            <Skeleton key={j} className="h-8 w-8 rounded-md" />
+                          ))}
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                : course.length > 0 &&
+                  course.map((course) => (
+                    <TableRow key={course.slug}>
+                      <TableCell>
+                        <div className="flex items-center gap-3">
+                          <Image
+                            alt=""
+                            src={course.image}
+                            width={64}
+                            height={64}
+                            className="size-12 sm:size-16 rounded-lg object-cover"
+                          />
+                          <div className="flex flex-col gap-1">
+                            <h3 className="font-bold text-sm sm:text-base">
+                              {course.title}
+                            </h3>
+                            <h4 className="text-xs sm:text-sm text-slate-500">
+                              {new Date(course.created_at).toLocaleDateString(
+                                "vi-VI"
+                              )}
+                            </h4>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <span
+                          className="font-bold text-sm sm:text-base text-primary"
+                          suppressHydrationWarning
                         >
-                          <IconStudy />
-                        </Link>
-                        <Link
-                          href={`/course/${course.slug}`}
-                          target="_blank"
-                          className={commonClassName.action}
-                        >
-                          <IconEye />
-                        </Link>
-                        <Link
-                          href={`/manage/course/update?slug=${course.slug}`}
-                          target="_blank"
-                          className={commonClassName.action}
-                        >
-                          <IconEdit />
-                        </Link>
+                          {course.price.toLocaleString()}đ
+                        </span>
+                      </TableCell>
+                      <TableCell>
                         <button
-                          onClick={() => handleDeleteCourse(course.slug)}
-                          className={commonClassName.action}
+                          onClick={() =>
+                            handleChangeStatus(course.slug, course.status)
+                          }
+                          type="button"
+                          className={cn(
+                            commonClassName.status,
+                            courseStatus.find(
+                              (item) => item.value === course.status
+                            )?.className
+                          )}
                         >
-                          <IconDelete />
+                          {
+                            courseStatus.find(
+                              (item) => item.value === course.status
+                            )?.title
+                          }
                         </button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex flex-wrap gap-2 sm:gap-3">
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Link
+                                  href={`/manage/course/update-content?slug=${course.slug}`}
+                                  className={commonClassName.action}
+                                  target="_blank"
+                                >
+                                  <IconStudy />
+                                </Link>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                Chỉnh sửa nội dung
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Link
+                                  href={`/course/${course.slug}`}
+                                  target="_blank"
+                                  className={commonClassName.action}
+                                >
+                                  <IconEye />
+                                </Link>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                Xem trang khóa học
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Link
+                                  href={`/manage/course/update?slug=${course.slug}`}
+                                  target="_blank"
+                                  className={commonClassName.action}
+                                >
+                                  <IconEdit />
+                                </Link>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                Chỉnh sửa thông tin
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <button
+                                  onClick={() =>
+                                    handleDeleteCourse(course.slug)
+                                  }
+                                  className={commonClassName.action}
+                                >
+                                  <IconDelete />
+                                </button>
+                              </TooltipTrigger>
+                              <TooltipContent>Xóa khóa học</TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
             </TableBody>
           </Table>
         </div>
 
         {/* Nút phân trang */}
         <div className="flex justify-center sm:justify-end gap-3 mt-5">
-          <button className="size-10 rounded-md flex items-center justify-center bg-primary hover:bg-blue-700">
+          <button
+            className="size-10 rounded-md flex items-center justify-center bg-primary hover:bg-blue-700"
+            onClick={() => handleChangPage("prev", page)}
+          >
             {IconArrowLeft}
           </button>
-          <button className="size-10 rounded-md flex items-center justify-center bg-primary hover:bg-blue-700">
+          <button
+            className="size-10 rounded-md flex items-center justify-center bg-primary hover:bg-blue-700"
+            onClick={() => handleChangPage("next", page)}
+          >
             {IconArrowRight}
           </button>
         </div>

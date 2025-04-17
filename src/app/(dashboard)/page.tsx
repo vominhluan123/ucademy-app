@@ -1,10 +1,10 @@
 import CourseItem from "@/components/course/CourseItem";
 import Heading from "@/components/typography/Heading";
-import { getAllCourses } from "@/lib/actions/course.action";
+import { getAllCoursesPublic } from "@/lib/actions/course.action";
 import { Fragment } from "react";
 
 const page = async () => {
-  const courses = (await getAllCourses()) || [];
+  const courses = (await getAllCoursesPublic({})) || [];
   return (
     <Fragment>
       <Heading>Khu vực khám phá</Heading>
