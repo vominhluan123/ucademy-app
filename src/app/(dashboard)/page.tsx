@@ -2,7 +2,7 @@ import CourseItem from "@/components/course/CourseItem";
 import Heading from "@/components/typography/Heading";
 import { getAllCoursesPublic } from "@/lib/actions/course.action";
 import { Fragment } from "react";
-
+export const revalidate = 0;
 const page = async () => {
   const courses = (await getAllCoursesPublic({})) || [];
   return (
