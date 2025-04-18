@@ -48,13 +48,13 @@ export async function getAllCoursesPublic(
       query.$or = [{ title: { $regex: search, $options: "i" } }];
     }
     query.status = ECourseStatus.APPROVED;
-    const Courses = await Course.find(query)
+    const courses = await Course.find(query)
       .skip(skip)
       .limit(limit)
       .sort({ created_at: -1 });
-    return Courses;
+    return courses;
   } catch (error) {
-    return [];
+    console.error(error);
   }
 }
 

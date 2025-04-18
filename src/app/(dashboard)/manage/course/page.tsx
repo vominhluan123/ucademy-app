@@ -14,8 +14,8 @@ const page = async ({
   const course = await getAllCourses({
     page: Number(searchParams.page) || 1,
     limit: 10,
-    search: searchParams.search || "",
-    status: searchParams.status || "",
+    search: searchParams.search,
+    status: searchParams.status,
   });
   return (
     <>
