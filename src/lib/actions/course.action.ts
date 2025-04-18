@@ -8,6 +8,7 @@ import {
   TGetAllCourseParams,
   TUpdateCourseParams,
 } from "@/types";
+import { ECourseStatus } from "@/types/enum";
 import { FilterQuery } from "mongoose";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
@@ -43,7 +44,7 @@ export async function getAllCoursesPublic(
     const { page = 1, limit = 10, search } = params;
     const skip = (page - 1) * limit;
     const query: FilterQuery<typeof Course> = {
-      status: "APPROVED",
+      status: ECourseStatus.APPROVED,
     };
     if (search) {
       query.$or = [{ title: { $regex: search, $options: "i" } }];
