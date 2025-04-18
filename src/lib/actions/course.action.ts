@@ -47,7 +47,7 @@ export async function getAllCoursesPublic(
     if (search) {
       query.$or = [{ title: { $regex: search, $options: "i" } }];
     }
-    query.status = ECourseStatus.APPROVED;
+    query.status = status === ECourseStatus.APPROVED;
     const Courses = await Course.find(query)
       .skip(skip)
       .limit(limit)
