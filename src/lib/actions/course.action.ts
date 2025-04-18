@@ -41,13 +41,13 @@ export async function getAllCoursesPublic(
 ): Promise<ICourse[] | undefined> {
   try {
     connectToDatabase();
-    const { page = 1, limit = 10, search, status } = params;
+    const { page = 1, limit = 10, search } = params;
     const skip = (page - 1) * limit;
     const query: FilterQuery<typeof Course> = {};
     if (search) {
       query.$or = [{ title: { $regex: search, $options: "i" } }];
     }
-    query.status = status === ECourseStatus.APPROVED;
+    query.status = ECourseStatus.APPROVED;
     const Courses = await Course.find(query)
       .skip(skip)
       .limit(limit)
