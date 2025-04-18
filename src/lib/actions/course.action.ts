@@ -41,7 +41,7 @@ export async function getAllCoursesPublic(
 ): Promise<ICourse[] | undefined> {
   try {
     connectToDatabase();
-    const { page = 1, limit = 10, search } = params;
+    const { page = 1, limit = 10, search, status } = params;
     const skip = (page - 1) * limit;
     const query: FilterQuery<typeof Course> = {};
     if (search) {

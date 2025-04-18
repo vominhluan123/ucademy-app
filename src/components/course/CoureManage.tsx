@@ -73,6 +73,7 @@ const CoureManage = ({ course }: { course: ICourse[] }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
+
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -109,13 +110,13 @@ const CoureManage = ({ course }: { course: ICourse[] }) => {
   };
   const handleChangeStatus = async (slug: string, status: ECourseStatus) => {
     try {
-      Swal.fire({
+      await Swal.fire({
         title: "Bạn có muốn đổi trạng thái không",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "cập nhật",
+        confirmButtonText: "Cập nhật",
         cancelButtonText: "Huỷ",
       }).then(async (result) => {
         if (result.isConfirmed) {
@@ -131,12 +132,16 @@ const CoureManage = ({ course }: { course: ICourse[] }) => {
             path: "/manage/course",
           });
           toast.success("Cập nhật trạng thái thành công");
-          updateQueryParams("status", ""), updateQueryParams("search", "");
+          resetQueryParams();
         }
       });
     } catch (error) {
       console.log("🚀 ~ handleChangeStatus ~ error:", error);
     }
+  };
+  const resetQueryParams = () => {
+    const params = new URLSearchParams();
+    router.push(`${pathname}?${params.toString()}`);
   };
   const updateQueryParams = (key: string, value: string) => {
     router.push(`${pathname}?${createQueryString(key, value)}`);
