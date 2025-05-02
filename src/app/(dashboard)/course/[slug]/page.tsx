@@ -7,11 +7,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 import { getCourseBySlug } from "@/lib/actions/course.action";
+import { getUserInfo } from "@/lib/actions/user.action";
 import { TUpdateCourseLecture } from "@/types";
 import { ECourseStatus } from "@/types/enum";
+import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
+import ButtonEnroll from "./ButtonEnroll";
 
 const page = async ({
   params,
@@ -25,6 +27,8 @@ const page = async ({
     return null;
   }
   if (data.status !== ECourseStatus.APPROVED) return <PageNotFound />;
+  const { userId } = await auth();
+  const findUser = await getUserInfo({ userId: userId || "" });
   const videoId = data.intro_url?.split("v=")[1];
   const lectures = data?.lectures || [];
   return (
@@ -129,10 +133,10 @@ const page = async ({
         <div className="bg-white rounded-lg p-3 md:p-5 dark:bg-dark-card">
           <div className="flex items-center gap-2 mb-3">
             <strong className="text-primary text-xl font-bold dark:text-white">
-              {data.sale_price}
+              {data.sale_price.toLocaleString("en-EN")}
             </strong>
             <span className="text-slate-400 line-through text-sm dark:text-white">
-              {data.price}
+              {data.price.toLocaleString("en-EN")}
             </span>
             <span className="ml-auto font-semibold text-sm inline-block px-3 py-1 rounded-lg bg-primary text-primary bg-opacity-10 dark:text-white">
               {Math.floor(((data.price - data.sale_price) / data.price) * 100)}%
@@ -157,9 +161,11 @@ const page = async ({
               <span>Tài liệu kèm theo</span>
             </li>
           </ul>
-          <Button variant="primary" className="w-full">
-            Mua Khoá Học
-          </Button>
+          <ButtonEnroll
+            user={JSON.parse(JSON.stringify(findUser))}
+            courseId={JSON.parse(JSON.stringify(data._id))}
+            amount={data.price}
+          />
         </div>
       </div>
     </div>

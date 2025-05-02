@@ -8,7 +8,7 @@ import {
 } from "@/components/icons";
 
 import { TMenueItem } from "@/types";
-import { ECourseLevel, ECourseStatus } from "@/types/enum";
+import { ECourseLevel, ECourseStatus, EOrderStatus } from "@/types/enum";
 
 export const MenuIcons: TMenueItem[] = [
   {
@@ -40,6 +40,27 @@ export const MenuIcons: TMenueItem[] = [
     url: "/manage/comment",
     title: "Quản lý bình luận",
     icon: <IconComment className="size-5" />,
+  },
+];
+export const orderStatus: {
+  title: string;
+  value: EOrderStatus;
+  className?: string;
+}[] = [
+  {
+    title: "Đã duyệt",
+    value: EOrderStatus.COMPLETED,
+    className: "text-green-500 bg-green-500",
+  },
+  {
+    title: "Chờ duyệt",
+    value: EOrderStatus.PENDING,
+    className: "text-orange-500 bg-orange-500",
+  },
+  {
+    title: "Đã hủy",
+    value: EOrderStatus.CANCELED,
+    className: "text-red-500 bg-red-500",
   },
 ];
 export const courseStatus: {
@@ -86,6 +107,7 @@ export const courseLevelTitele: Record<ECourseLevel, string> = {
   [ECourseLevel.INTERMEDIATE]: "Trung bình",
   [ECourseLevel.ADVANCED]: "Khó",
 };
+
 export const commonClassName = {
   status:
     "!bg-opacity-10 border border-current rounded-md font-medium px-3 py-1 whitespace-nowrap",

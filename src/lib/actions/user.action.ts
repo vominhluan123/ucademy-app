@@ -27,7 +27,7 @@ export async function getUserInfo({
       clerkId: userId,
     });
     if (!findUser) return null;
-    return findUser || null;
+    return findUser;
   } catch (error) {
     console.log("Error fetching user info:", error);
   }

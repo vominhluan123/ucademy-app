@@ -1,3 +1,0 @@
-enum EUserStatus {
-  ACTIVE = "ACTIVE",
-}

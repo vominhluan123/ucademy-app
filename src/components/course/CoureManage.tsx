@@ -8,19 +8,20 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import useQueryString from "@/app/hooks/useQueryString";
 import { commonClassName, courseStatus } from "@/constants";
 import { ICourse } from "@/database/course.model";
 import { updateCourse } from "@/lib/actions/course.action";
-import { cn } from "@/lib/utils";
 import { ECourseStatus } from "@/types/enum";
 import { debounce } from "lodash";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useState, useTransition } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import StatusBadge from "../common/StatusBadge";
 import { IconDelete, IconEdit, IconStudy } from "../icons";
 import IconEye from "../icons/IconEye";
 import Heading from "../typography/Heading";
@@ -71,27 +72,19 @@ const IconArrowRight = (
 const CoureManage = ({ course }: { course: ICourse[] }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams]
-  );
+  const { createQueryString } = useQueryString();
   const handleDeleteCourse = (slug: string) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "Bạn có chắc chắn muốn xóa khoá học này không?",
+      text: "Khoá học sẽ bị xóa vĩnh viễn",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Xoá",
+      cancelButtonText: "Huỷ",
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await updateCourse({
@@ -297,24 +290,14 @@ const CoureManage = ({ course }: { course: ICourse[] }) => {
                         </span>
                       </TableCell>
                       <TableCell>
-                        <button
+                        <StatusBadge
+                          status={course.status}
+                          statusList={courseStatus}
                           onClick={() =>
                             handleChangeStatus(course.slug, course.status)
                           }
-                          type="button"
-                          className={cn(
-                            commonClassName.status,
-                            courseStatus.find(
-                              (item) => item.value === course.status
-                            )?.className
-                          )}
-                        >
-                          {
-                            courseStatus.find(
-                              (item) => item.value === course.status
-                            )?.title
-                          }
-                        </button>
+                          as="button"
+                        />
                       </TableCell>
                       <TableCell>
                         <div className="flex flex-wrap gap-2 sm:gap-3">
