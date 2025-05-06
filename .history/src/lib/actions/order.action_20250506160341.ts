@@ -111,6 +111,7 @@ export async function getOrderDetails({ code }: { code: string }) {
       path: "course",
       select: "title",
     });
+    console.log("🚀 ~ orderDetails ~ orderDetails:", orderDetails);
     return JSON.parse(JSON.stringify(orderDetails));
   } catch (error) {
     console.error("Lỗi khi lấy chi tiết đơn hàng:", error);

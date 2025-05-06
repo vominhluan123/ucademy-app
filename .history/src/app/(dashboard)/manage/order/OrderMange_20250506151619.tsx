@@ -229,24 +229,22 @@ const OrderMange = ({
                     {orders.status !== EOrderStatus.CANCELED && (
                       <TableCell className="flex gap-3 items-center">
                         <TooltipProvider>
-                          {orders.status === EOrderStatus.PENDING && (
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button
-                                  className={commonClassName.action}
-                                  onClick={() =>
-                                    handleUpdateOrder({
-                                      orderId: orders._id,
-                                      status: EOrderStatus.COMPLETED,
-                                    })
-                                  }
-                                >
-                                  <IconCheck />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>Duyệt đơn hàng</TooltipContent>
-                            </Tooltip>
-                          )}
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                className={commonClassName.action}
+                                onClick={() =>
+                                  handleUpdateOrder({
+                                    orderId: orders._id,
+                                    status: EOrderStatus.COMPLETED,
+                                  })
+                                }
+                              >
+                                <IconCheck />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>Duyệt đơn hàng</TooltipContent>
+                          </Tooltip>
                           <Tooltip>
                             <TooltipTrigger asChild>
                               <Button

@@ -30,9 +30,6 @@ const ButtonEnroll = ({
       amount: amount,
       discount: 0,
     });
-    if (newOrder.code) {
-      router.push(`/order/${newOrder.code}`);
-    }
   };
 
   return (

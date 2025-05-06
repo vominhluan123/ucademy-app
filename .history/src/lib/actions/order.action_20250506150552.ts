@@ -70,13 +70,12 @@ export async function updateOrder({
         path: "course",
       })
       .populate({
-        model: User,
         path: "user",
-        select: "_id",
+        model: User,
+        select: "course",
       });
     if (!findOrder) return null;
     if (findOrder.status === EOrderStatus.CANCELED) return;
-    const findUser = await User.findById(findOrder.user._id);
     await Order.findByIdAndUpdate(orderId, {
       status,
     });
@@ -84,35 +83,9 @@ export async function updateOrder({
       status === EOrderStatus.COMPLETED &&
       findOrder.status === EOrderStatus.PENDING
     ) {
-      findUser.courses.push(findOrder.course._id);
-      await findUser.save();
-    }
-    if (
-      status === EOrderStatus.CANCELED &&
-      findOrder.status === EOrderStatus.COMPLETED
-    ) {
-      findUser.courses = findUser.courses.filter(
-        (el: any) => el.toString() !== findOrder.course._id.toString()
-      );
-      await findUser.save();
     }
     revalidatePath("/manage/order");
-    return {
-      success: true,
-    };
   } catch (error) {
     console.error("Lỗi khi cập nhật đơn hàng:", error);
-  }
-}
-export async function getOrderDetails({ code }: { code: string }) {
-  try {
-    connectToDatabase();
-    const orderDetails = await Order.findOne({ code }).populate({
-      path: "course",
-      select: "title",
-    });
-    return JSON.parse(JSON.stringify(orderDetails));
-  } catch (error) {
-    console.error("Lỗi khi lấy chi tiết đơn hàng:", error);
   }
 }

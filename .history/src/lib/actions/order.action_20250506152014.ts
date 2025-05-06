@@ -91,7 +91,7 @@ export async function updateOrder({
       status === EOrderStatus.CANCELED &&
       findOrder.status === EOrderStatus.COMPLETED
     ) {
-      findUser.courses = findUser.courses.filter(
+      findUser.courses.filter(
         (el: any) => el.toString() !== findOrder.course._id.toString()
       );
       await findUser.save();
@@ -102,17 +102,5 @@ export async function updateOrder({
     };
   } catch (error) {
     console.error("Lỗi khi cập nhật đơn hàng:", error);
-  }
-}
-export async function getOrderDetails({ code }: { code: string }) {
-  try {
-    connectToDatabase();
-    const orderDetails = await Order.findOne({ code }).populate({
-      path: "course",
-      select: "title",
-    });
-    return JSON.parse(JSON.stringify(orderDetails));
-  } catch (error) {
-    console.error("Lỗi khi lấy chi tiết đơn hàng:", error);
   }
 }

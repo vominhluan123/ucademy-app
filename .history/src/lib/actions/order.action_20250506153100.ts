@@ -107,10 +107,7 @@ export async function updateOrder({
 export async function getOrderDetails({ code }: { code: string }) {
   try {
     connectToDatabase();
-    const orderDetails = await Order.findOne({ code }).populate({
-      path: "course",
-      select: "title",
-    });
+    const orderDetails = await Order.findOne({ code });
     return JSON.parse(JSON.stringify(orderDetails));
   } catch (error) {
     console.error("Lỗi khi lấy chi tiết đơn hàng:", error);

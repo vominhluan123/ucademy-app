@@ -108,6 +108,7 @@ export async function getOrderDetails({ code }: { code: string }) {
   try {
     connectToDatabase();
     const orderDetails = await Order.findOne({ code }).populate({
+      model: User,
       path: "course",
       select: "title",
     });

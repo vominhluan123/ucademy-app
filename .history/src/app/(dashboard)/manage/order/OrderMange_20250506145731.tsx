@@ -34,7 +34,6 @@ import { EOrderStatus } from "@/types/enum";
 import { debounce } from "lodash";
 import Link from "next/link";
 import { useState, useTransition } from "react";
-import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 const IconArrowLeft = (
   <svg
@@ -78,35 +77,27 @@ const OrderMange = ({
     _id: string;
   }[];
 }) => {
-  const handleUpdateOrder = async ({
+  const handleUpdateOrder = ({
     orderId,
     status,
   }: {
     orderId: string;
     status: EOrderStatus;
   }) => {
-    if (status === EOrderStatus.CANCELED) {
-      Swal.fire({
-        title: "Bạn có chắc chắn muốn huỷ đơn hàng này không?",
-        text: "Đơn hàng sẽ không thể khôi phục lại!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Có, tôi muốn huỷ!",
-        cancelButtonText: "Huỷ",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          await updateOrder({ orderId, status });
-        }
-      });
-    }
-    if (status === EOrderStatus.COMPLETED) {
-      const res = await updateOrder({ orderId, status });
-      if (res?.success) {
-        toast.success("Duyệt đơn hàng thành công!");
+    Swal.fire({
+      title: "Bạn có chắc chắn muốn huỷ đơn hàng này không?",
+      text: "Đơn hàng sẽ không thể khôi phục lại!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Có, tôi muốn huỷ!",
+      cancelButtonText: "Huỷ",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await updateOrder({ orderId, status });
       }
-    }
+    });
   };
   const [isPending, startTransition] = useTransition();
   const { createQueryString, pathname, router } = useQueryString();
@@ -126,6 +117,7 @@ const OrderMange = ({
     },
     500
   );
+  const handleComleteOrder = () => {};
   const [page, setPage] = useState(1);
   const handleChangPage = (type: "prev" | "next", page: number) => {
     const newPage = type === "prev" ? Math.max(1, page - 1) : page + 1;
@@ -227,26 +219,19 @@ const OrderMange = ({
                       ></StatusBadge>
                     </TableCell>
                     {orders.status !== EOrderStatus.CANCELED && (
-                      <TableCell className="flex gap-3 items-center">
+                      <TableCell className="flex gap-2">
                         <TooltipProvider>
-                          {orders.status === EOrderStatus.PENDING && (
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button
-                                  className={commonClassName.action}
-                                  onClick={() =>
-                                    handleUpdateOrder({
-                                      orderId: orders._id,
-                                      status: EOrderStatus.COMPLETED,
-                                    })
-                                  }
-                                >
-                                  <IconCheck />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>Duyệt đơn hàng</TooltipContent>
-                            </Tooltip>
-                          )}
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                className={commonClassName.action}
+                                onClick={handleComleteOrder}
+                              >
+                                <IconCheck />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>Duyệt đơn hàng</TooltipContent>
+                          </Tooltip>
                           <Tooltip>
                             <TooltipTrigger asChild>
                               <Button

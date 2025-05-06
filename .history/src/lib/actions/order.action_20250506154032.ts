@@ -107,7 +107,7 @@ export async function updateOrder({
 export async function getOrderDetails({ code }: { code: string }) {
   try {
     connectToDatabase();
-    const orderDetails = await Order.findOne({ code }).populate({
+    const orderDetails = await Order.findOne({ code: code }).populate({
       path: "course",
       select: "title",
     });

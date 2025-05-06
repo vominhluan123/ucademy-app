@@ -34,7 +34,6 @@ import { EOrderStatus } from "@/types/enum";
 import { debounce } from "lodash";
 import Link from "next/link";
 import { useState, useTransition } from "react";
-import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 const IconArrowLeft = (
   <svg
@@ -78,7 +77,7 @@ const OrderMange = ({
     _id: string;
   }[];
 }) => {
-  const handleUpdateOrder = async ({
+  const handleUpdateOrder = ({
     orderId,
     status,
   }: {
@@ -100,12 +99,6 @@ const OrderMange = ({
           await updateOrder({ orderId, status });
         }
       });
-    }
-    if (status === EOrderStatus.COMPLETED) {
-      const res = await updateOrder({ orderId, status });
-      if (res?.success) {
-        toast.success("Duyệt đơn hàng thành công!");
-      }
     }
   };
   const [isPending, startTransition] = useTransition();
@@ -227,26 +220,24 @@ const OrderMange = ({
                       ></StatusBadge>
                     </TableCell>
                     {orders.status !== EOrderStatus.CANCELED && (
-                      <TableCell className="flex gap-3 items-center">
+                      <TableCell className="flex gap-2">
                         <TooltipProvider>
-                          {orders.status === EOrderStatus.PENDING && (
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button
-                                  className={commonClassName.action}
-                                  onClick={() =>
-                                    handleUpdateOrder({
-                                      orderId: orders._id,
-                                      status: EOrderStatus.COMPLETED,
-                                    })
-                                  }
-                                >
-                                  <IconCheck />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>Duyệt đơn hàng</TooltipContent>
-                            </Tooltip>
-                          )}
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                className={commonClassName.action}
+                                onClick={() =>
+                                  handleUpdateOrder({
+                                    orderId: orders._id,
+                                    status: EOrderStatus.COMPLETED,
+                                  })
+                                }
+                              >
+                                <IconCheck />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>Duyệt đơn hàng</TooltipContent>
+                          </Tooltip>
                           <Tooltip>
                             <TooltipTrigger asChild>
                               <Button
